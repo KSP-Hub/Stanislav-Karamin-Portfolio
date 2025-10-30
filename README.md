@@ -31,11 +31,11 @@ Project Name: «Stanislav Karamin - Portfolio Website»
 
 ### Mission and vision of the project
 Create a functional but simple web portfolio with future scalability in mind:
-- ** Cost-effective** - Zero budget solution;
+- **Cost-effective** - Zero budget solution;
 - **Fast development** - 2- x week lead time;
-- ** Professional quality** - Aesthetic design and minimalism, like BMW;
+- **Professional quality** - Aesthetic design and minimalism, like BMW;
 - **Scalable architecture** - Readiness for further information expansion without involving professional resources and budget;
-- **Maintenance and Support ** - Offline operation for as long as necessary.
+- **Maintenance and Support** - Offline operation for as long as necessary.
 
 ### Architecture Concept
 **Benefits associated with using a single HTML file:**
@@ -63,7 +63,7 @@ Create a functional but simple web portfolio with future scalability in mind:
 ## Technology stack
 |Layer |Technologies|
 |:-----|:-----------|
-|Frontend|Frontend	HTML5, CSS3, JavaScript|
+|Frontend|HTML5, CSS3, JavaScript|
 |Styling|CSS Grid, Flexbox, Variables|
 |Icons|Font Awesome|
 |Architecture|Object-Oriented JavaScript|
