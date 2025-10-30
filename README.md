@@ -47,16 +47,16 @@ Create a functional but simple web portfolio with future scalability in mind:
 
 **Illustrative example**:
 ```html
-<!-- АРХИТЕКТУРА: все в одном месте -->
+<!-- ARCHITECTURE: all in one place -->
 <!DOCTYPE html>
 <html>
 <head>
-    <style>/* CSS - более 450 строк */</style>
+    <style>/* CSS - over 450 lines */</style>
 </head>
 <body>
-    <!-- HTML - структурированный контент -->
-    <скрипт>/* JS - более 200 строк ООП */</скрипт>
-</тело>
+    <!-- HTML structured content -->
+    <script>/* JS - more than 200 lines of OOP */</script>
+</body>
 </html>
 ```
 
