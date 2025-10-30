@@ -2,7 +2,7 @@
 
 Project Name: «Stanislav Karamin - Portfolio Website»
 
-![Portfolio Preview](https://raw.githubusercontent.com/KSP-Hub/assets/main/portfolio-preview.jpg)
+[Portfolio Preview](https://raw.githubusercontent.com/KSP-Hub/assets/https/github.dev/karamin-stanislav/karamin-stanislav/image/screencapture-ksp-hub-github-io-Stanislav-Karamin-Portfolio%20Website-2025-10-30-15_04_13.png)
 
 ## Portfolio Showcase
 **Project Management**
@@ -19,7 +19,7 @@ Project Name: «Stanislav Karamin - Portfolio Website»
 - **Development Time**: <2 weeks
 
 ## Live Demo
-**[View Live Portfolio](https://ksp-hub.github.io/Stanislav-Karamin-Portfolio/)**
+**[View Live Portfolio](https://ksp-hub.github.io/Stanislav-Karamin-Portfolio)**
 
 ## Project Philosophy
 
