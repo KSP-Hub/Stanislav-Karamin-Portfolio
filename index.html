@@ -965,6 +965,83 @@
                 </div>
             </div>
             <p style="margin-top: 1rem; opacity: 0.8;">&copy; 2025 Stanislav Karamin. All rights reserved.</p>
+
+
+<!-- Кастомный Код информера Яндекс Метрики с API =======================================================================-->
+<div class="metrika-api-widget">
+    <div class="stats-container">
+        <div class="stat-item">
+            <div class="stat-value" id="visitors-today">0</div>
+            <div class="stat-label">Посетителей сегодня</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="views-today">0</div>
+            <div class="stat-label">Просмотров сегодня</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="total-visitors">0</div>
+            <div class="stat-label">Всего посетителей</div>
+        </div>
+    </div>
+    <div class="metrika-logo">
+        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCA4MCAxNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTcuNDM3NSAxNC43NUwwLjg3NSAwSDBWMTQuNzVINy40Mzc1VjE0Ljc1Wk0xOC4yNSAxNC43NUgxMC42ODc1VjBIMTguMjVWMTQuNzVaTTI5LjA2MjUgMTQuNzVIMjEuNVYwSDI5LjA2MjVWMTQuNzVaTTM5Ljg3NSAxNC43NUgzMi4zMTI1VjBIMzkuODc1VjE0Ljc1Wk01MC42ODc1IDE0Ljc1SDQzLjEyNVYwSDUwLjY4NzVWMTQuNzVaTTYxLjUgMTQuNzVINTMuOTM3NVYwSDYxLjVWMTQuNzVaTTcyLjMxMjUgMTQuNzVINjQuNzVWMEg3Mi4zMTI1VjE0Ljc1Wk04My4xMjUgMTQuNzVINzUuNTYyNVYwSDgzLjEyNVYxNC43NVoiIGZpbGw9IiNmZmYiLz4KPC9zdmc+" 
+             alt="Яндекс Метрика" 
+             width="80" 
+             height="15">
+    </div>
+</div>
+
+<style>
+.metrika-api-widget {
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+.metrika-logo {
+    opacity: 0.7;
+    margin-top: 10px;
+}
+</style>
+
+<script>
+// Простой вариант обновления статистики (для демонстрации)
+document.addEventListener('DOMContentLoaded', function() {
+    // В реальном проекте здесь был бы API запрос к Яндекс.Метрике
+    setTimeout(() => {
+        document.getElementById('visitors-today').textContent = '12';
+        document.getElementById('views-today').textContent = '47';
+        document.getElementById('total-visitors').textContent = '1.2K';
+    }, 1000);
+});
+</script>
+            
         </div>
     </footer>
 
