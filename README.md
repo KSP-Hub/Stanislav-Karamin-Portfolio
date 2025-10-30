@@ -1,119 +1,159 @@
-# Описание сайта-портфолио Stanislava Karamina
+# Introductory information
 
-## Обзор проекта
-* Ресурсы: 10 — пальцев. 1 — голова. 2 — глаза. 
-* Бюджет: Личное время. 0 — монет.
+Project Name: «Stanislav Karamin - Portfolio Website»
 
-## Цель и задачи
-* Создать функциональное, но в тоже время простое веб-портфолио с возможность масштабирования. Бесплатное. 
-  * Сделать за неделю, две максимум — современное, адаптивное веб-портфолио, разработанное для демонстрации навыков и проектов в области анализа данных, программирования и работы с технологиями. Сайт сочетает в себе профессиональный дизайн, передовые функции и оптимальную производительность.
+![Portfolio Preview](https://raw.githubusercontent.com/KSP-Hub/assets/main/portfolio-preview.jpg)
 
-## Концепция
-> Проект одного HTML файла для:
-1. простоты развертывания;
-2. мгновенной загрузки;
-3. простоты обслуживания и изменений;
-4. всё в одном месте;
-5. соответветствует требованиям.
+## Portfolio Showcase
+**Project Management**
+* 10+ Real Projects - Practical data analysis examples;
+* Animated GIF Previews - Dynamic project demonstrations;
+* Direct Source Links - Transparent code access;
+* Detailed Documentation - Comprehensive project insights.
 
-Наглядный пример:
+## Project Metrics
+- **Performance**: 100/100 Lighthouse
+- **Responsive**: Cross-platform compatibility  
+- **Loading**: Instant (single file architecture)
+- **Maintenance**: Minimal overhead
+- **Development Time**: <2 weeks
+
+## Live Demo
+**[View Live Portfolio](https://ksp-hub.github.io/Stanislav-Karamin-Portfolio/)**
+
+## Project Philosophy
+
+> Minimum investment — maximum return!
+
+### Resources & Budget - Portfolio Website
+- **Resources**: 10 fingers, 1 head, 2 eyes;
+- **Budget**: Personal time, 0 coins.
+
+### Mission and vision of the project
+Create a functional but simple web portfolio with future scalability in mind:
+- ** Cost-effective** - Zero budget solution;
+- **Fast development** - 2- x week lead time;
+- ** Professional quality** - Aesthetic design and minimalism, like BMW;
+- **Scalable architecture** - Readiness for further information expansion without involving professional resources and budget;
+- **Maintenance and Support ** - Offline operation for as long as necessary.
+
+### Architecture Concept
+**Benefits associated with using a single HTML file:**
+1. **Instant deployment** - One-click hosting
+2. **Lightning fast** - No external dependencies  
+3. **Easy maintenance** - Everything in one place
+4. **Cross-platform** - Universal compatibility
+5. **Employer-friendly** - Quick code review
+
+**Illustrative example**:
 ```html
-<!-- ВСЁ В ОДНОМ ФАЙЛЕ -->
+<!-- АРХИТЕКТУРА: все в одном месте -->
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        /* CSS здесь */
-    </style>
+    <style>/* CSS - более 450 строк */</style>
 </head>
 <body>
-    <!-- HTML здесь -->
-    <script>
-        // JavaScript здесь  
-    </script>
-</body>
+    <!-- HTML - структурированный контент -->
+    <скрипт>/* JS - более 200 строк ООП */</скрипт>
+</тело>
 </html>
 ```
 
-## Технологический стек
-* HTML5;
-* CSS3 (Flexbox, Grid, CSS переменные);
-* JavaScript;
-* Font Awesome;
-* Адаптивный дизайн - mobile-first подход.
+## Technology stack
+|Layer |Technologies|
+|:-----|:-----------|
+|Frontend|Frontend	HTML5, CSS3, JavaScript|
+|Styling|CSS Grid, Flexbox, Variables|
+|Icons|Font Awesome|
+|Architecture|Object-Oriented JavaScript|
+|Deployment|GitHub Pages|
 
-## Ключевые улучшения в версии 10
-### Расширенная система управления проектами
-* Поиск в реальном времени по названиям и описаниям проектов;
-* Фильтрация по технологиям;
-* Сортировка по дате (новые/старые первыми);
-* Динамическое обновление интерфейса;
+## License
+This project is open source and available under the [MIT License](https://choosealicense.com/licenses/mit/).
 
-### Оптимизация производительности
-* Ленивая загрузка изображений с Intersection Observer API;
-* Индикаторы загрузки для лучшего UX;
-* Эффективное управление состоянием проектов;
-* Оптимизированные анимации и переходы;.
-
-### Улучшенная доступность
-* ARIA атрибуты для скринридеров;
-* Навигация с клавиатуры и поддержка ESC для модальных окон;
-* Скрытые элементы для навигации (Skip Links);
-* Семантическая HTML разметка.
-
-### Расширенный пользовательский интерфейс
-* Интуитивные элементы управления фильтрацией и поиском;
-* Визуальная обратная связь для всех действий;
-* Адаптивный дизайн для всех устройств;
-* Профессиональная цветовая схема с системой CSS переменных.
-
-### Визуальные особенности
-* Современный градиентный заголовок с анимированной фотографией профиля;
-* Карточный дизайн секций с тенями и акцентными бордюрами;
-* Интерактивная таблица проектов с GIF-превью;
-* Профессиональные бейджи с эффектом размытия фона;
-* Плавные анимации появления при прокрутке.
-
-### Функциональность портфолио
-**Управление проектами**:
-* Автоматическая сортировка по дате создания;
-* Мгновенный поиск по ключевым словам;
-* Фильтрация по стеку технологий;
-* Статусные сообщения о результатах фильтрации.
-
-**Интерактивные элементы**:
-* Модальные окна для детального просмотра изображений;
-* Эффекты наведения с увеличением превью;
-* Интерактивные ссылки на исходные файлы проектов;
-* Адаптивная навигация между разделами.
-
-### Контактная информация и интеграции
-* Мультиплатформенные контакты (Email, GitHub, LinkedIn, Telegram, WhatsApp, HH.ru);
-* Кастомные логотипы с правильным отображением размеров;
-* Защищенные ссылки с атрибутами rel="noopener";
-* Профессиональное оформление футера.
-
-### Адаптивность и производительность
-* Mobile-first подход с прогрессивным улучшением;
-* Гибкие таблицы с горизонтальной прокруткой на мобильных;
-* Оптимизированные изображения с отложенной загрузкой;
-* Быстрая загрузка за счет минимального использования внешних ресурсов.
-
-### Технические особенности
-* Чистая архитектура кода с разделением ответственности
-* Объектно-ориентированный JavaScript для управления проектами
-* CSS переменные для легкой настройки темы
-* Оптимизированная семантика для SEO
-* Кросс-браузерная совместимость
-
-## Структура проекта
+## Project structure
+```text
 Stanislav-Karamin-Portfolio  
 │  
-├── index.html                    — **`Главный HTML файл`**  
-├── README.md                     — **`Описание проекта`**  
-├── assets                        — **`Папка для ресурсов`**  
-│   ├── images  
-└── .gitignore                    — **`Исключаемые файлы`**
+├── index.html             # The Master file
+├── README.md              # Project documentation 
+├── assets                 # Resource directory
+│   ├── images/            # Visual assets  
+└── .gitignore             # Version control settings
+```
 
-## Заключение
-Это портфолио представляет собой не просто демонстрацию проектов, а полноценное веб-приложение, showcasing современные подходы к веб-разработке, UX/UI дизайну и интерактивности.
+# The area of action
+
+## Tasks
+- [x] ~Made in a Week is a modern, adaptive web portfolio designed to showcase skills and projects in data analysis, programming, and working with technology. The website combines professional design, advanced features and optimal performance.~
+
+# Key improvements in version 10
+
+### Enhanced project management system
+* Real-time search by project names and descriptions;
+* Filtering by technologies;
+* Sorting by date (new/old first);
+* Dynamic interface updates;
+
+### Performance optimization
+* Lazy loading of images with Intersection Observer API;
+* Loading indicators for better UX;
+* Efficient project status management;
+* Optimized animations and transitions.
+
+### Improved accessibility
+* ARIA attributes for screen readers;
+* Keyboard navigation and ESC support for modal windows;
+* Hidden navigation elements (Skip Links);
+* Semantic HTML markup.
+
+### Enhanced user interface
+* Intuitive filtering and search controls;
+* Visual feedback for all actions;
+* Responsive design for all devices;
+* Professional color scheme with CSS variables system.
+
+### Visual features
+* Modern gradient header with animated profile photo;
+* Card-based section design with shadows and accent borders;
+* Interactive project table with GIF previews;
+* Professional badges with background blur effect;
+* Smooth animations when scrolling.
+
+### Portfolio functionality
+**Project management**:
+* Automatic sorting by creation date;
+* Instant keyword search;
+* Filtering by technology stack;
+* Status messages about filtering results.
+
+**Interactive elements**:
+* Modal windows for detailed image viewing;
+* Hover effects with preview enlargement;
+* Interactive links to project source files;
+* Adaptive navigation between sections.
+
+### Contact information and integrations
+* Multi-platform contacts (Email, Social network, Messengers, CV-ENG/RUS);
+* Custom logos with correct size display;
+* Secure links with rel="noopener" attributes;
+* Professional footer design.
+
+### Adaptability and performance
+* Mobile-first approach with progressive enhancement;
+* Flexible tables with horizontal scrolling on mobile devices;
+* Optimized images with deferred loading;
+* Fast loading due to minimal use of external resources.
+
+### Technical features
+* Clean code architecture with separation of responsibilities
+* Object-oriented JavaScript for project management
+* CSS variables for easy theme customization
+* Optimized semantics for SEO
+* Cross-browser compatibility
+
+Translated with DeepL.com (free version)
+
+# Conclusion
+This portfolio is not just a demonstration of projects, but a full-fledged web application, showcasing modern approaches to web development, UX/UI design and interactivity.
