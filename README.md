@@ -153,7 +153,12 @@ Stanislav-Karamin-Portfolio
 * Optimized semantics for SEO
 * Cross-browser compatibility
 
-Translated with DeepL.com (free version)
-
 # Conclusion
 This portfolio is not just a demonstration of projects, but a full-fledged web application, showcasing modern approaches to web development, UX/UI design and interactivity.
+
+---
+
+**⭐ If this project inspires you, please give it a star!**:  
+    1. ❓ Click on me ➡ [**How** do I give a star?](https://docs.github.com/en/get-started/exploring-projects-on-github/saving-repositories-with-stars)  
+    2. ✅ Click on me ➡ [**Where** do I give a star?](https://github.com/KSP-Hub/Stanislav-Karamin-Portfolio)  
+    3. 🎁 Click on me ➡ [Take the gift from me! `I owe you a chocolate bar and a Mercedes G-class. Take them!`](https://raw.githubusercontent.com/KSP-Hub/assets/https/github.dev/karamin-stanislav/karamin-stanislav/image/Chocolate-Mercedes-G-Class-orig.webp)
