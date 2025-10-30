@@ -612,18 +612,18 @@
         .fa-linkedin { color: #0077b5; }
     </style>
 
-<!-- Yandex.Metrika counter ======================================================================================= -->
+<!-- Yandex.Metrika (Яндекс Метрика) counter ======================================================================================= -->
 <script type="text/javascript">
     (function(m,e,t,r,i,k,a){
         m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
         m[i].l=1*new Date();
         for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
         k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=104973305', 'ym');
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=ea9e94e7d4dc4023b0b19cf40f44b574', 'ym');
 
     ym(104973305, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
 </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/104973305" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<noscript><div><img src="https://mc.yandex.ru/watch/ea9e94e7d4dc4023b0b19cf40f44b574" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter ======================================================================================= -->
     
 </head>
@@ -1033,8 +1033,8 @@
 
 <script>
 // Конфигурация
-const METRIKA_COUNTER_ID = '104973305';
-const YANDEX_OAUTH_TOKEN = 'ВАШ_OAUTH_ТОКЕН'; // Получите через OAuth flow
+const METRIKA_COUNTER_ID = 'ea9e94e7d4dc4023b0b19cf40f44b574';
+const YANDEX_OAUTH_TOKEN = 'y0__xDh9IuSARigozsgkpWr-hTs5_GKdLkgPNVh0o2nZobjRM-2hg'; // Получите через OAuth flow (https://oauth.yandex.ru/authorize?response_type=token&client_id=ea9e94e7d4dc4023b0b19cf40f44b574)
 
 async function loadRealMetrikaStats() {
     try {
@@ -1043,7 +1043,7 @@ async function loadRealMetrikaStats() {
         const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
         
         // Запрос к API Яндекс.Метрики
-        const response = await fetch(`https://api-metrica.yandex.net/stat/v1/data?ids=${METRIKA_COUNTER_ID}&metrics=ym:s:users,ym:s:pageviews,ym:s:avgVisitDuration&date1=${yesterday}&date2=${today}`, {
+        const response = await fetch(`https://api-metrica.yandex.net/stat/v1/data?ids=${ea9e94e7d4dc4023b0b19cf40f44b574}&metrics=ym:s:users,ym:s:pageviews,ym:s:avgVisitDuration&date1=${yesterday}&date2=${today}`, {
             method: 'GET',
             headers: {
                 'Authorization': `OAuth ${YANDEX_OAUTH_TOKEN}`,
