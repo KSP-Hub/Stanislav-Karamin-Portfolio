@@ -1,0 +1,59 @@
+# robots.txt for Stanislav Karamin Portfolio
+# https://ksp-hub.github.io/Stanislav-Karamin-Portfolio/
+# Last updated: 2025-01-23
+
+# ========================================
+# Global Rules - Allow all search engines
+# ========================================
+User-agent: *
+Allow: /
+
+# ========================================
+# Sitemap Location
+# ========================================
+Sitemap: https://ksp-hub.github.io/Stanislav-Karamin-Portfolio/sitemap.xml
+
+# ========================================
+# Specific Search Engine Rules
+# ========================================
+
+# Google
+User-agent: Googlebot
+User-agent: Googlebot-Image
+User-agent: Googlebot-Mobile
+Allow: /
+
+# Yandex (Russian search engine)
+User-agent: Yandex
+User-agent: YandexBot
+User-agent: YandexImages
+Allow: /
+
+# Bing / Microsoft
+User-agent: Bingbot
+User-agent: msnbot
+Allow: /
+
+# Other major search engines
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# ========================================
+# Crawl Settings (Optional)
+# ========================================
+# Recommended delay between requests (in seconds)
+# Set to 0 for no delay, or increase if needed
+Crawl-delay: 0
+
+# ========================================
+# Disallowed Paths (if needed in future)
+# ========================================
+# Example: Disallow: /private/
+# Example: Disallow: /*.json$
+# Example: Disallow: /admin/
