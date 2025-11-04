@@ -1,0 +1,42 @@
+{
+  "name": "Stanislav Karamin Portfolio",
+  "short_name": "Karamin",
+  "description": "Programmer-Analyst Portfolio - Python, SQL, BI, Statistics",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/KSP-Hub/Stanislav-Karamin-Portfolio/main/assets/k_favicon_io/k_favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/KSP-Hub/Stanislav-Karamin-Portfolio/main/assets/k_favicon_io/k_favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/KSP-Hub/Stanislav-Karamin-Portfolio/main/assets/k_favicon_io/k_apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/KSP-Hub/Stanislav-Karamin-Portfolio/main/assets/k_favicon_io/k_android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/KSP-Hub/Stanislav-Karamin-Portfolio/main/assets/k_favicon_io/k_android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "theme_color": "#F00",
+  "background_color": "#F00",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "start_url": "/Stanislav-Karamin-Portfolio/",
+  "scope": "/Stanislav-Karamin-Portfolio/",
+  "lang": "ru",
+  "dir": "ltr"
+}
