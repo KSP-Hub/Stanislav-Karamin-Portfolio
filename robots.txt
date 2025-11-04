@@ -1,6 +1,6 @@
 # robots.txt for Stanislav Karamin Portfolio
 # https://ksp-hub.github.io/Stanislav-Karamin-Portfolio/
-# Last updated: 2025-01-23
+# Last updated: 2025-01-30
 
 # ========================================
 # Global Rules - Allow all search engines
