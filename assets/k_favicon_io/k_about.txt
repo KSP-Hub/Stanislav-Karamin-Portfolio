@@ -1,0 +1,9 @@
+This favicon was generated using the following font:
+
+- Font Title: Ribeye Marrow
+- Background: Square
+- Background Color: #F00
+- Font Color: #FFF
+- Font Author: undefined (https://favicon.io)
+- Font Source: https://fonts.gstatic.com/s/ribeyemarrow/v25/GFDsWApshnqMRO2JdtRZ2d0vEAwTVWgKdtw.ttf
+- Font License: undefined
