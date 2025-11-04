@@ -3,12 +3,12 @@
 <head>
 
     <!-- Yandex.Metrica counter ================================== -->
-<script type="text/javascript">
+<script type="text/javascript" defer>
     (function(m,e,t,r,i,k,a){
       m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
       m[i].l=1*new Date();
       for (var j=0; j<document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
-      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.defer=1,k.src=r,a.parentNode.insertBefore(k,a)
     })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
   
     ym("ea9e94e7d4dc4023b0b19cf40f44b574", "init", {
@@ -22,19 +22,19 @@
 
     <!-- Google tag (gtag.js) ================================== -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RRWNG4DZE1"></script>
-<script>
+<script defer>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-RRWNG4DZE1');
 </script>
     <!-- Google tag (gtag.js) ================================== -->
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="theme-color" content="#2c3e50">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="theme-color" content="#F00">
     <meta name="format-detection" content="telephone=no">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -76,10 +76,23 @@
     <link rel="alternate" hreflang="ru" href="https://ksp-hub.github.io/Stanislav-Karamin-Portfolio/">
     <link rel="alternate" hreflang="en" href="https://ksp-hub.github.io/Stanislav-Karamin-Portfolio/">
     <link rel="alternate" hreflang="x-default" href="https://ksp-hub.github.io/Stanislav-Karamin-Portfolio/">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💼%3C/text%3E%3C/svg%3E">
-    <link rel="alternate icon" href="https://raw.githubusercontent.com/KSP-Hub/assets/c9a08d816996bafee8e1acbb36ade5d8bd90bbb5/image/KSP-Profile-Photo3B.webp">
-    <meta name="robots" content="index, follow">
+    
+    <!-- Favicons - K Logo (Red background, White K) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/KSP-Hub/Stanislav-Karamin-Portfolio/main/assets/k_favicon_io/k_favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/KSP-Hub/Stanislav-Karamin-Portfolio/main/assets/k_favicon_io/k_favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/KSP-Hub/Stanislav-Karamin-Portfolio/main/assets/k_favicon_io/k_apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://raw.githubusercontent.com/KSP-Hub/Stanislav-Karamin-Portfolio/main/assets/k_favicon_io/k_android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="https://raw.githubusercontent.com/KSP-Hub/Stanislav-Karamin-Portfolio/main/assets/k_favicon_io/k_android-chrome-512x512.png">
+    <link rel="manifest" href="https://raw.githubusercontent.com/KSP-Hub/Stanislav-Karamin-Portfolio/main/assets/k_favicon_io/k_site.webmanifest">
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/KSP-Hub/Stanislav-Karamin-Portfolio/main/assets/k_favicon_io/k_favicon.ico">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <!-- DNS Prefetch and Preconnect for Performance -->
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://raw.githubusercontent.com">
+    <link rel="dns-prefetch" href="https://mc.yandex.ru">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
     <script type="application/ld+json">
     {
@@ -588,11 +601,14 @@
             border-top: 1px solid #334155;
             padding: 0.9rem 1rem;
             z-index: 10000;
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
         }
         .consent-inner { max-width: 1200px; margin: 0 auto; display: flex; gap: 0.75rem; align-items: center; justify-content: space-between; flex-wrap: wrap; }
         .consent-actions { display: flex; gap: 0.5rem; }
-        .btn-consent { padding: 0.4rem 0.8rem; border-radius: 6px; border: 1px solid #475569; background: #111827; color: #e5e7eb; cursor: pointer; }
+        .btn-consent { padding: 0.4rem 0.8rem; border-radius: 6px; border: 1px solid #475569; background: #111827; color: #e5e7eb; cursor: pointer; transition: background 0.2s ease, border-color 0.2s ease; }
+        .btn-consent:hover { background: #1e293b; border-color: #64748b; }
         .btn-consent.primary { background: #2563eb; border-color: #2563eb; }
+        .btn-consent.primary:hover { background: #1d4ed8; border-color: #1d4ed8; }
 
         /* Link Styles */
         a {
@@ -739,6 +755,81 @@
                 color: #e5e7eb;
                 border-color: #334155;
             }
+            /* Filter panel - ensure text is visible */
+            .filter-label {
+                color: #e5e7eb;
+            }
+            .filter-stats {
+                color: #cbd5e1;
+            }
+            /* Chip buttons - dark background for dark theme */
+            .chip {
+                background: #1e293b;
+                color: #e5e7eb;
+                border-color: #475569;
+            }
+            .chip:hover {
+                background: #334155;
+                color: #f1f5f9;
+                border-color: #6ab0ff;
+            }
+            .chip.selected {
+                background: #6ab0ff;
+                color: #ffffff;
+                border-color: #6ab0ff;
+            }
+            /* Footer - dark background with light text */
+            footer {
+                background: #1e293b;
+                color: #e5e7eb;
+            }
+            footer a {
+                color: #6ab0ff;
+            }
+            footer a:hover {
+                color: #93c5fd;
+            }
+            /* Table hover states - dark theme compatible */
+            .tech-table tr:hover, .projects-table tr:hover {
+                background: #1e293b;
+                box-shadow: inset 3px 0 0 var(--secondary-color);
+            }
+            /* Pagination buttons */
+            .pagination button {
+                background: #1e293b;
+                color: #e5e7eb;
+                border-color: #475569;
+            }
+            .pagination button:hover:not(:disabled) {
+                background: #334155;
+                color: #f1f5f9;
+                border-color: #6ab0ff;
+            }
+            .pagination .page-info {
+                color: #cbd5e1;
+            }
+            /* Consent banner - ensure visibility in dark mode */
+            .consent-banner {
+                background: #1e293b;
+                border-top-color: #475569;
+            }
+            .btn-consent {
+                background: #334155;
+                border-color: #64748b;
+                color: #e5e7eb;
+            }
+            .btn-consent:hover {
+                background: #475569;
+                border-color: #94a3b8;
+            }
+            .btn-consent.primary {
+                background: #3b82f6;
+                border-color: #3b82f6;
+            }
+            .btn-consent.primary:hover {
+                background: #2563eb;
+                border-color: #2563eb;
+            }
         }
     </style>
 </head>
@@ -751,7 +842,7 @@
     <header>
         <div class="container">
             <div class="profile-header">
-                <img src="https://raw.githubusercontent.com/KSP-Hub/assets/c9a08d816996bafee8e1acbb36ade5d8bd90bbb5/image/KSP-Profile-Photo3B.webp" alt="Stanislav Karamin" class="profile-photo">
+                <img src="https://raw.githubusercontent.com/KSP-Hub/assets/c9a08d816996bafee8e1acbb36ade5d8bd90bbb5/image/KSP-Profile-Photo3B.webp" alt="Stanislav Karamin" class="profile-photo" width="160" height="160" fetchpriority="high" loading="eager">
                 <div>
                     <h1>Stanislav Karamin</h1>
                     <div class="tagline">Programmer-analyst (Python, SQL, BI, Statistics)</div>
@@ -1142,20 +1233,31 @@
                 });
             }
 
+            // XSS protection: escape HTML special characters
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
             function renderTable() {
                 const filtered = getFilteredProjects();
                 const total = filtered.length;
                 const start = (currentPage - 1) * PAGE_SIZE;
                 const pageItems = filtered.slice(start, start + PAGE_SIZE);
                 tbody.innerHTML = pageItems.map(function (p) {
-                    const tech = p.tech.join(', ');
-                    const date = p.date;
-                    const linkHtml = p.link.startsWith('http') ? `<a href="${p.link}" class="project-link" target="_blank" rel="noopener noreferrer">Open</a>` : `<a href="${p.link}" class="project-link">Open</a>`;
+                    const tech = escapeHtml(p.tech.join(', '));
+                    const date = escapeHtml(p.date);
+                    const title = escapeHtml(p.title);
+                    const desc = escapeHtml(p.desc);
+                    const imageUrl = escapeHtml(p.image);
+                    const linkUrl = escapeHtml(p.link);
+                    const linkHtml = p.link.startsWith('http') ? `<a href="${linkUrl}" class="project-link" target="_blank" rel="noopener noreferrer">Open</a>` : `<a href="${linkUrl}" class="project-link">Open</a>`;
                     return `<tr>
-                        <td data-label="Preview" class="image-col"><img class="thumb" src="${p.image}" alt="${p.title}" loading="lazy" decoding="async" data-image-src="${p.image}" data-image-title="${p.title}"></td>
-                        <td data-label="Project"><strong>${p.title}</strong></td>
+                        <td data-label="Preview" class="image-col"><img class="thumb" src="${imageUrl}" alt="${title}" width="160" height="120" loading="lazy" decoding="async" data-image-src="${imageUrl}" data-image-title="${title}"></td>
+                        <td data-label="Project"><strong>${title}</strong></td>
                         <td data-label="Tech stack">${tech}</td>
-                        <td data-label="Description">${p.desc}</td>
+                        <td data-label="Description">${desc}</td>
                         <td data-label="Date"><time datetime="${date}">${date}</time></td>
                         <td data-label="Link">${linkHtml}</td>
                     </tr>`;
@@ -1185,16 +1287,21 @@
 
                 // Update page info
                 const pageInfo = document.getElementById('page-info');
+                const prevBtn = document.getElementById('prev-page');
+                const nextBtn = document.getElementById('next-page');
                 const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
                 if (currentPage > totalPages) currentPage = totalPages;
-                pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
-
-                document.getElementById('prev-page').disabled = currentPage <= 1;
-                document.getElementById('next-page').disabled = currentPage >= totalPages;
+                if (pageInfo) {
+                    pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+                }
+                if (prevBtn) prevBtn.disabled = currentPage <= 1;
+                if (nextBtn) nextBtn.disabled = currentPage >= totalPages;
 
                 // Update filter stats
                 const stats = document.getElementById('filter-stats');
-                stats.textContent = (total === projects.length) ? '' : (`${total} of ${projects.length} shown`);
+                if (stats) {
+                    stats.textContent = (total === projects.length) ? '' : (`${total} of ${projects.length} shown`);
+                }
             }
 
             document.getElementById('prev-page').addEventListener('click', function(){ if (currentPage > 1) { currentPage--; renderTable(); }});
