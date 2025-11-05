@@ -1,0 +1,25 @@
+```gitignore
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Archives
+Archives/
+
+# Temporary files
+*.tmp
+*.log
+```
