@@ -1,0 +1,17 @@
+```yaml
+name: SEO Check
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Validate HTML
+        run: |
+          # Проверка структуры HTML
+          # Можно добавить валидаторы
+```
