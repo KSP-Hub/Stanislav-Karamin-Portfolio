@@ -70,6 +70,9 @@
     
     <!-- Yandex.Metrica and Yandex Webmaster -->
     <meta name="yandex-verification" content="y0__xDh9IuSARigozsgkpWr-hTs5_GKdLkgPNVh0o2nZobjRM-2hg">
+    <!-- NOTE: Google Site Verification - Currently using Google Analytics ID.
+         If this doesn't work for verification, you may need to use a proper verification code
+         from Google Search Console instead of the Analytics ID. -->
     <meta name="google-site-verification" content="G-RRWNG4DZE1">
     
     <!-- Language Alternates -->
@@ -86,6 +89,8 @@
     <link rel="manifest" href="https://raw.githubusercontent.com/KSP-Hub/Stanislav-Karamin-Portfolio/main/assets/k_favicon_io/k_site.webmanifest">
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/KSP-Hub/Stanislav-Karamin-Portfolio/main/assets/k_favicon_io/k_favicon.ico">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <meta name="bingbot" content="index, follow">
     <!-- DNS Prefetch and Preconnect for Performance -->
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://raw.githubusercontent.com">
@@ -150,694 +155,70 @@
       ]
     }
     </script>
-    <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --text-color: #333;
-            --bg-color: #f8f9fa;
-            --card-bg: #ffffff;
-            --border-color: #e1e4e8;
-        }
+<!-- Critical CSS (inline, see next point) -->
+<style>
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #3498db;
+  --accent-color: #e74c3c;
+  --success-color: #27ae60;
+  --text-color: #333;
+  --bg-color: #f8f9fa;
+  --card-bg: #ffffff;
+  --border-color: #e1e4e8;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+}
+
+header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+#hero {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  padding: 4rem 20px;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  animation: fadeInDown 1s ease;
+}
+
+#hero p {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+</style>
+
+<!-- Основной CSS файл -->
+<link rel="stylesheet" href="css/main.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="css/main.css"></noscript>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--bg-color);
-            padding: 0;
-            margin: 0;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Visually hidden utility for accessibility */
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
-        }
-
-        /* Header Styles */
-        header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 4rem 0;
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .profile-header h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        .profile-header .tagline {
-            font-size: 1.4rem;
-            opacity: 0.9;
-            margin-bottom: 1rem;
-        }
-
-        .profile-badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.2);
-            padding: 0.5rem 1.5rem;
-            border-radius: 25px;
-            font-size: 1rem;
-            margin-top: 1rem;
-        }
-
-        .profile-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .profile-photo {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid rgba(255,255,255,0.35);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.28);
-        }
-
-        .competencies-box {
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background: #e8f4f8;
-            border-radius: 8px;
-            border-left: 4px solid #3498db;
-        }
-
-        .competencies-box ul {
-            margin-top: 0.5rem;
-            margin-left: 1.5rem;
-        }
-
-        .analytics-stats {
-            margin-top: 0.75rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            align-items: center;
-            justify-content: center;
-            opacity: 0.85;
-        }
-
-        .analytics-box {
-            background: #f8fafc;
-            color: #0f172a;
-            padding: 0.5rem 0.6rem;
-            border-radius: 8px;
-            border: 1px solid #e5e7eb;
-            font-size: 0.8rem;
-        }
-
-        .analytics-box strong {
-            opacity: 0.8;
-        }
-
-        .analytics-box span {
-            margin-left: 0.5rem;
-        }
-
-        .copyright {
-            margin-top: 1rem;
-            opacity: 0.8;
-        }
-
-        /* Section Styles */
-        section {
-            background: var(--card-bg);
-            margin: 2rem 0;
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            border-left: 5px solid var(--secondary-color);
-        }
-
-        section.reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        section.reveal.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        section h2 {
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        section h2 i {
-            color: var(--secondary-color);
-        }
-
-        /* List Styles */
-        .goals-list {
-            list-style: none;
-            counter-reset: goal-counter;
-        }
-
-        .goals-list li {
-            counter-increment: goal-counter;
-            margin-bottom: 1rem;
-            padding: 1rem;
-            background: var(--bg-color);
-            border-radius: 8px;
-            border-left: 4px solid var(--secondary-color);
-        }
-
-        .goals-list li::before {
-            content: counter(goal-counter);
-            background: var(--secondary-color);
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 1rem;
-            font-weight: bold;
-        }
-
-        /* Table Styles */
-        .tech-table, .projects-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-        }
-
-        .projects-table { table-layout: fixed; }
-
-        .tech-table th, .projects-table th {
-            background: var(--primary-color);
-            color: white;
-            padding: 1rem;
-            text-align: left;
-        }
-
-        .tech-table td, .projects-table td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--border-color);
-            vertical-align: top;
-        }
-
-        .tech-table tr:nth-child(even), .projects-table tbody tr:nth-child(even) {
-            background: var(--bg-color);
-        }
-
-        .tech-table tr:hover, .projects-table tr:hover {
-            background: #e3f2fd;
-            box-shadow: inset 3px 0 0 var(--secondary-color);
-        }
-
-        /* Projects table extras */
-        .projects-table img.thumb {
-            width: 160px;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            display: block;
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .projects-table img.thumb:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        /* Image Modal/Lightbox */
-        .image-modal {
-            display: none;
-            position: fixed;
-            z-index: 20000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.9);
-            animation: fadeIn 0.3s ease;
-        }
-
-        .image-modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .image-modal-content {
-            position: relative;
-            max-width: 90vw;
-            max-height: 90vh;
-            margin: auto;
-            animation: zoomIn 0.3s ease;
-        }
-
-        .image-modal img {
-            max-width: 100%;
-            max-height: 90vh;
-            object-fit: contain;
-            border-radius: 8px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-        }
-
-        .image-modal-close {
-            position: absolute;
-            top: -40px;
-            right: 0;
-            color: #fff;
-            font-size: 2.5rem;
-            font-weight: bold;
-            cursor: pointer;
-            background: rgba(255,255,255,0.1);
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s ease;
-        }
-
-        .image-modal-close:hover,
-        .image-modal-close:focus {
-            background: rgba(255,255,255,0.2);
-            outline: 2px solid #fff;
-        }
-
-        .image-modal-caption {
-            color: #fff;
-            text-align: center;
-            padding: 1rem;
-            font-size: 1.1rem;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes zoomIn {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        @media (max-width: 768px) {
-            .image-modal-close {
-                top: 10px;
-                right: 10px;
-                font-size: 2rem;
-                width: 40px;
-                height: 40px;
-                background: rgba(0,0,0,0.7);
-            }
-
-            .image-modal-caption {
-                font-size: 0.95rem;
-                padding: 0.75rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .profile-photo {
-                width: 120px;
-                height: 120px;
-            }
-
-            .image-modal-close {
-                top: 5px;
-                right: 5px;
-                width: 35px;
-                height: 35px;
-                font-size: 1.75rem;
-            }
-        }
-
-        /* Fix image column width and wrap long text in others */
-        .projects-table th.image-col, .projects-table td.image-col { width: 180px; }
-        .projects-table td:not(.image-col), .projects-table th:not(.image-col) { overflow-wrap: anywhere; word-break: break-word; }
-
-        .table-toolbar {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin: 0.5rem 0 0.75rem 0;
-        }
-
-        .pagination {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .pagination button {
-            padding: 0.35rem 0.65rem;
-            border: 1px solid var(--border-color);
-            background: #fff;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background 0.2s ease, border-color 0.2s ease;
-        }
-
-        .pagination button:hover:not(:disabled) {
-            background: var(--bg-color);
-            border-color: var(--secondary-color);
-        }
-
-        .pagination button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            background: var(--bg-color);
-        }
-
-        .pagination .page-info { font-size: 0.9rem; opacity: 0.9; }
-
-        /* Project filters */
-        .filters-panel {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            margin: 1rem 0 1.25rem 0;
-            padding: 1rem;
-            background: var(--bg-color);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-        }
-
-        .filter-group {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-label {
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-right: 0.25rem;
-        }
-
-        .chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.35rem 0.75rem;
-            border-radius: 999px;
-            border: 1px solid var(--border-color);
-            background: #fff;
-            color: var(--text-color);
-            cursor: pointer;
-            user-select: none;
-            transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-        }
-
-        .chip:hover { border-color: var(--secondary-color); }
-        .chip.selected { background: var(--secondary-color); color: #fff; border-color: var(--secondary-color); }
-
-        .filter-stats { font-size: 0.9rem; opacity: 0.9; margin-left: auto; }
-
-        /* Consent banner */
-        .consent-banner {
-            position: fixed;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: #0f172a;
-            color: #e5e7eb;
-            border-top: 1px solid #334155;
-            padding: 0.9rem 1rem;
-            z-index: 10000;
-            box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
-        }
-        .consent-inner { max-width: 1200px; margin: 0 auto; display: flex; gap: 0.75rem; align-items: center; justify-content: space-between; flex-wrap: wrap; }
-        .consent-actions { display: flex; gap: 0.5rem; }
-        .btn-consent { padding: 0.4rem 0.8rem; border-radius: 6px; border: 1px solid #475569; background: #111827; color: #e5e7eb; cursor: pointer; transition: background 0.2s ease, border-color 0.2s ease; }
-        .btn-consent:hover { background: #1e293b; border-color: #64748b; }
-        .btn-consent.primary { background: #2563eb; border-color: #2563eb; }
-        .btn-consent.primary:hover { background: #1d4ed8; border-color: #1d4ed8; }
-
-        /* Link Styles */
-        a {
-            color: var(--secondary-color);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: var(--accent-color);
-            text-decoration: underline;
-        }
-
-        a:focus-visible, button:focus-visible, .project-link:focus-visible {
-            outline: 3px solid var(--accent-color);
-            outline-offset: 2px;
-            border-radius: 6px;
-        }
-
-        .project-link {
-            display: inline-block;
-            background: var(--secondary-color);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            font-weight: 500;
-            transition: background 0.3s ease, transform 0.2s ease;
-        }
-
-        .project-link:hover {
-            background: var(--accent-color);
-            text-decoration: none;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--primary-color);
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 3rem;
-        }
-
-        address {
-            font-style: normal;
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .profile-header h1 {
-                font-size: 2rem;
-            }
-            
-            .profile-header .tagline {
-                font-size: 1.1rem;
-            }
-            
-            section {
-                padding: 1.5rem;
-                margin: 1rem 0;
-            }
-            
-            .tech-table, .projects-table {
-                font-size: 0.9rem;
-            }
-            
-            .tech-table th, .projects-table th,
-            .tech-table td, .projects-table td {
-                padding: 0.5rem;
-            }
-            
-            .contact-info {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .filters-panel { padding: 0.75rem; }
-        }
-
-        /* Mobile stacked tables */
-        @media (max-width: 600px) {
-            .projects-table thead { display: none; }
-            .projects-table, .projects-table tbody, .projects-table tr, .projects-table td { display: block; width: 100%; }
-            .projects-table tr { margin-bottom: 1rem; background: var(--card-bg); border-radius: 8px; padding: 0.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-            .projects-table td { border: 0; padding: 0.35rem 0; }
-            .projects-table td::before {
-                content: attr(data-label);
-                font-weight: 600;
-                display: block;
-                color: var(--primary-color);
-                margin-bottom: 0.25rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 10px;
-            }
-            
-            .tech-table, .projects-table {
-                display: block;
-                overflow-x: auto;
-            }
-        }
-
-        /* Reduced motion preference */
-        @media (prefers-reduced-motion: reduce) {
-            * { animation: none !important; transition: none !important; }
-            section.reveal { opacity: 1 !important; transform: none !important; }
-        }
-
-        /* Dark mode */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --primary-color: #c9d6e2;
-                --secondary-color: #6ab0ff;
-                --accent-color: #ff7766;
-                --text-color: #e5e7eb;
-                --bg-color: #0f172a;
-                --card-bg: #111827;
-                --border-color: #243041;
-            }
-            header { color: #0b1220; }
-            .competencies-box {
-                background: #1e293b;
-                border-left-color: #6ab0ff;
-            }
-            .analytics-box {
-                background: #1e293b;
-                color: #e5e7eb;
-                border-color: #334155;
-            }
-            /* Filter panel - ensure text is visible */
-            .filter-label {
-                color: #e5e7eb;
-            }
-            .filter-stats {
-                color: #cbd5e1;
-            }
-            /* Chip buttons - dark background for dark theme */
-            .chip {
-                background: #1e293b;
-                color: #e5e7eb;
-                border-color: #475569;
-            }
-            .chip:hover {
-                background: #334155;
-                color: #f1f5f9;
-                border-color: #6ab0ff;
-            }
-            .chip.selected {
-                background: #6ab0ff;
-                color: #ffffff;
-                border-color: #6ab0ff;
-            }
-            /* Footer - dark background with light text */
-            footer {
-                background: #1e293b;
-                color: #e5e7eb;
-            }
-            footer a {
-                color: #6ab0ff;
-            }
-            footer a:hover {
-                color: #93c5fd;
-            }
-            /* Table headers - dark theme compatible */
-            .tech-table th, .projects-table th {
-                background: #1e293b;
-                color: #f1f5f9;
-                border-bottom: 2px solid #475569;
-            }
-            /* Table hover states - dark theme compatible */
-            .tech-table tr:hover, .projects-table tr:hover {
-                background: #1e293b;
-                box-shadow: inset 3px 0 0 var(--secondary-color);
-            }
-            /* Pagination buttons */
-            .pagination button {
-                background: #1e293b;
-                color: #e5e7eb;
-                border-color: #475569;
-            }
-            .pagination button:hover:not(:disabled) {
-                background: #334155;
-                color: #f1f5f9;
-                border-color: #6ab0ff;
-            }
-            .pagination .page-info {
-                color: #cbd5e1;
-            }
-            /* Consent banner - ensure visibility in dark mode */
-            .consent-banner {
-                background: #1e293b;
-                border-top-color: #475569;
-            }
-            .btn-consent {
-                background: #334155;
-                border-color: #64748b;
-                color: #e5e7eb;
-            }
-            .btn-consent:hover {
-                background: #475569;
-                border-color: #94a3b8;
-            }
-            .btn-consent.primary {
-                background: #3b82f6;
-                border-color: #3b82f6;
-            }
-            .btn-consent.primary:hover {
-                background: #2563eb;
-                border-color: #2563eb;
-            }
-        }
-    </style>
 </head>
 <body>
 
@@ -848,12 +229,20 @@
     <header>
         <div class="container">
             <div class="profile-header">
-                <img src="https://raw.githubusercontent.com/KSP-Hub/assets/c9a08d816996bafee8e1acbb36ade5d8bd90bbb5/image/KSP-Profile-Photo3B.webp" alt="Stanislav Karamin" class="profile-photo" width="160" height="160" fetchpriority="high" loading="eager">
+                <img src="https://raw.githubusercontent.com/KSP-Hub/assets/c9a08d816996bafee8e1acbb36ade5d8bd90bbb5/image/KSP-Profile-Photo3B.webp" alt="Stanislav Karamin - Programmer Analyst" class="profile-photo" width="160" height="160" fetchpriority="high" loading="eager" decoding="async">
                 <div>
-                    <h1>Stanislav Karamin</h1>
-                    <div class="tagline">Programmer-analyst (Python, SQL, BI, Statistics)</div>
-                    <div class="profile-badge">
-                        <i class="fas fa-code" aria-hidden="true"></i> Data-Driven Solutions
+                    <h1>Станислав Карамин</h1>
+                    <div class="tagline">Программист-аналитик, CV-инженер, Стажер</div>
+                    <div class="profile-badges-container">
+                        <div class="profile-badge">
+                            <i class="fas fa-eye" aria-hidden="true"></i> Превращение пикселей в понимание
+                        </div>
+                        <div class="profile-badge">
+                            <i class="fas fa-graduation-cap" aria-hidden="true"></i> Подготовка к магистратуре AI & CV
+                        </div>
+                        <div class="profile-badge">
+                            <i class="fas fa-calendar-check" aria-hidden="true"></i> Цель: поступление до 16.09.2026
+                        </div>
                     </div>
                 </div>
             </div>
@@ -861,7 +250,7 @@
     </header>
 
     <!-- Consent banner -->
-    <div id="consent-banner" class="consent-banner" role="dialog" aria-live="polite" aria-label="Analytics consent" style="display:none;">
+    <div id="consent-banner" class="consent-banner" role="dialog" aria-live="polite" aria-label="Analytics consent" aria-hidden="true" style="display:none;">
         <div class="consent-inner">
             <div>
                 I use Yandex.Metrica and Google Analytics to analyze the usage of my website (my portfolio).
@@ -876,75 +265,132 @@
     <main class="container">
         <!-- ===== ABOUT ME SECTION ===== -->
         <section id="about" class="reveal" aria-labelledby="about-heading">
-            <h2 id="about-heading"><i class="fas fa-user" aria-hidden="true"></i> ABOUT ME</h2>
+            <h2 id="about-heading"><i class="fas fa-user" aria-hidden="true"></i> ОБО МНЕ</h2>
             <div class="about-section">
                 <div class="about-content">
-                    <p><strong>Programmer-analyst with skills in Python, SQL, BI, statistics, and mathematics.</strong></p>
+                    <p><strong>Программист-аналитик, переходящий в область компьютерного зрения и искусственного интеллекта.</strong></p>
                     
-                    <p>I love finding patterns in data and turning them into understandable reports.</p>
+                    <p>В настоящее время прохожу интенсивную подготовку для поступления в магистратуру "Artificial Intelligence and Computer Vision".</p>
                     
-                    <p>Currently, my main priority and incredible passion is developing my skills in the academic and professional fields of analytics, programming, and mathematics.</p>
+                    <p>Имею практический опыт анализа данных и создания дашбордов, что стало отличной базой для погружения в машинное обучение.</p>
                     
                     <div class="competencies-box">
-                        <strong>Core Competencies:</strong>
-                        <ul>
-                            <li>Collect, structure and analyze data;</li>
-                            <li>Programming in Python;</li>
-                            <li>Build reports and dashboards in Excel and DataLens;</li>
-                            <li>Use SQL to extract data from databases.</li>
+                        <strong>Базовые компетенции (по результатам обучения в РАНХиГС):</strong>
+                        <ul style="margin-top: 0.8rem; line-height: 1.8;">
+                            <li style="margin-bottom: 0.6rem;"><strong>Data Processing:</strong> сбор, структурирование, анализ данных;</li>
+                            <li style="margin-bottom: 0.6rem;"><strong>Python Development:</strong> pandas (обработка данных), matplotlib/seaborn (визуализация);</li>
+                            <li style="margin-bottom: 0.6rem;"><strong>Business Intelligence:</strong> отчёты и дашборды (Excel, DataLens);</li>
+                            <li style="margin-bottom: 0;"><strong>Database Management:</strong> SQL‑запросы в PostgreSQL.</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- Educational Vector Section -->
-        <section id="education" class="reveal" aria-labelledby="education-heading">
-            <h2 id="education-heading"><i class="fas fa-graduation-cap" aria-hidden="true"></i> EDUCATIONAL VECTOR</h2>
-            <ol class="goals-list">
-                <li>Complete courses on <a href="https://stepik.org/course/76/promo?auth=login" target="_blank" rel="noopener noreferrer">Fundamentals of Statistics</a></li>
-                <li>Take courses on <a href="https://ru.khanacademy.org/math/statistics-probability" target="_blank" rel="noopener noreferrer">Probability Theory and Mathematical Statistics</a></li>
-                <li>Take courses on <a href="https://stepik.org/course/63054/promo#toc" target="_blank" rel="noopener noreferrer">Interactive SQL Trainer</a></li>
-                <li>Complete courses on <a href="https://stepik.org/org/pygen" target="_blank" rel="noopener noreferrer">Python Generation 1-3 lvl</a></li>
-                <li>Learn C++ as a second programming language at <a href="https://stepik.org/org/compscicenter" target="_blank" rel="noopener noreferrer">CS Center</a></li>
-                <li>Achieve B1 level English proficiency</li>
-                <li>Complete a two-year master's program in machine learning at HSE</li>
-            </ol>
-        </section>
-
-        <!-- Long-term Goals Section -->
-        <section id="goals" class="reveal" aria-labelledby="goals-heading">
-            <h2 id="goals-heading"><i class="fas fa-bullseye" aria-hidden="true"></i> LONG-TERM GOALS AND EXPECTATIONS</h2>
-            <ol class="goals-list">
-                <li>Degree in computer science</li>
-                <li>Create competitive solutions that solve business and community problems by creating commercial products, including open source products, that are useful and professional in the global market. Under the "Made in Russia" quality mark.</li>
-            </ol>
-        </section>
 
         <!-- Technologies Section -->
         <section id="technologies" class="reveal" aria-labelledby="technologies-heading">
-            <h2 id="technologies-heading"><i class="fas fa-laptop-code" aria-hidden="true"></i> SET OF TECHNOLOGIES</h2>
+            <h2 id="technologies-heading"><i class="fas fa-laptop-code" aria-hidden="true"></i> ТЕХНОЛОГИИ И НАВЫКИ</h2>
+            
+            <!-- Легенда/условные обозначения -->
+            <div class="tech-legend" role="group" aria-label="Technology proficiency levels">
+                <span class="legend-item">
+                    <span class="legend-color mastered" aria-hidden="true"></span>
+                    Освоено
+                </span>
+                <span class="legend-item">
+                    <span class="legend-color learning" aria-hidden="true"></span>
+                    Изучаю
+                </span>
+                <span class="legend-item">
+                    <span class="legend-color planned" aria-hidden="true"></span>
+                    Планирую
+                </span>
+            </div>
+            
             <table class="tech-table">
-                <caption class="sr-only">Technologies and tools used</caption>
+                <caption class="sr-only">Technologies and skills with proficiency levels</caption>
                 <tbody>
+                    <!-- Programming Languages -->
                     <tr>
-                        <td><strong>Languages</strong></td>
-                        <td>Python, SQL, Markdown</td>
+                        <td><strong>Programming Languages</strong></td>
+                        <td>
+                            <span class="tech-tag mastered">Python</span>
+                            <span class="tech-tag mastered">SQL</span>
+                            <span class="tech-tag mastered">Markdown</span>
+                            <span class="tech-tag learning">C++</span>
+                        </td>
                     </tr>
+                    
+                    <!-- Data Analysis & Visualization -->
                     <tr>
-                        <td><strong>Spreadsheets</strong></td>
-                        <td>MS Excel, Google Sheets, R7 Office, OpenOffice</td>
+                        <td><strong>Data Analysis & Visualization</strong></td>
+                        <td>
+                            <span class="tech-tag mastered">MS Excel</span>
+                            <span class="tech-tag mastered">Google Sheets</span>
+                            <span class="tech-tag mastered">R7 Office</span>
+                            <span class="tech-tag mastered">OpenOffice</span>
+                            <span class="tech-tag mastered">DataLens</span>
+                        </td>
                     </tr>
+                    
+                    <!-- Databases & Data Storage -->
                     <tr>
-                        <td><strong>Databases</strong></td>
-                        <td>ClickHouse, PostgreSQL, DBeaver</td>
+                        <td><strong>Databases & Data Storage</strong></td>
+                        <td>
+                            <span class="tech-tag mastered">ClickHouse</span>
+                            <span class="tech-tag mastered">PostgreSQL</span>
+                            <span class="tech-tag mastered">DBeaver</span>
+                        </td>
                     </tr>
+                    
+                    <!-- Development Tools -->
                     <tr>
-                        <td><strong>Tools</strong></td>
-                        <td>Git, GitHub, Anaconda, Jupyter, Google Colab, VS Code, PyCharm, DataLens</td>
+                        <td><strong>Development Tools</strong></td>
+                        <td>
+                            <span class="tech-tag mastered">Git</span>
+                            <span class="tech-tag mastered">GitHub</span>
+                            <span class="tech-tag mastered">VS Code</span>
+                            <span class="tech-tag mastered">PyCharm</span>
+                        </td>
                     </tr>
+                    
+                    <!-- Data Science Environment -->
                     <tr>
-                        <td><strong>Concepts</strong></td>
-                        <td>Object-oriented programming (OOP)</td>
+                        <td><strong>Data Science Environment</strong></td>
+                        <td>
+                            <span class="tech-tag mastered">Anaconda</span>
+                            <span class="tech-tag mastered">Jupyter</span>
+                            <span class="tech-tag mastered">Google Colab</span>
+                        </td>
+                    </tr>
+                    
+                    <!-- Machine Learning & AI -->
+                    <tr>
+                        <td><strong>Machine Learning & AI</strong></td>
+                        <td>
+                            <span class="tech-tag planned">PyTorch</span>
+                            <span class="tech-tag planned">TensorFlow</span>
+                            <span class="tech-tag planned">Computer Vision</span>
+                            <span class="tech-tag planned">Нейронные сети</span>
+                        </td>
+                    </tr>
+                    
+                    <!-- Computer Science Fundamentals -->
+                    <tr>
+                        <td><strong>Computer Science Fundamentals</strong></td>
+                        <td>
+                            <span class="tech-tag mastered">Object-oriented programming (OOP)</span>
+                            <span class="tech-tag learning">Алгоритмы</span>
+                        </td>
+                    </tr>
+                    
+                    <!-- Mathematics for Data Science -->
+                    <tr>
+                        <td><strong>Mathematics for Data Science</strong></td>
+                        <td>
+                            <span class="tech-tag learning">Линейная алгебра</span>
+                            <span class="tech-tag learning">Математический анализ</span>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -952,51 +398,230 @@
 
         <!-- Projects Section -->
         <section id="projects" class="reveal" aria-labelledby="projects-heading">
-            <h2 id="projects-heading"><i class="fas fa-briefcase" aria-hidden="true"></i> EXAMPLES OF MY WORK</h2>
-            <div class="filters-panel" id="project-filters" aria-label="Project filters">
+            <h2 id="projects-heading">
+                <i class="fas fa-briefcase" aria-hidden="true"></i> МОИ ПРОЕКТЫ
+                <span class="total-hours-badge" id="total-hours-badge" title="Общее время работы над проектами">
+                    <i class="fas fa-clock" aria-hidden="true"></i>
+                    <span id="total-hours">0</span> ч
+                </span>
+            </h2>
+            
+            <p class="projects-intro-text">
+                <i class="fas fa-info-circle"></i> В настоящее время работаю над первыми проектами в области компьютерного зрения. 
+                Ниже представлены проекты по анализу данных, которые демонстрируют мою способность работать с кодом и данными.
+            </p>
+            
+            <!-- Улучшенная система фильтрации -->
+            <div class="filters-panel">
                 <div class="filter-group">
-                    <span class="filter-label">Filter by Tech stack:</span>
-                    <div id="tech-chips" role="group" aria-label="Technology"></div>
+                    <h3><i class="fas fa-folder" aria-hidden="true"></i> Категория</h3>
+                    <div class="tech-tags" role="group" aria-label="Filter projects by category">
+                        <div class="tech-tag active" data-category="all" role="button" tabindex="0" aria-pressed="true" aria-label="Show all projects">Все проекты</div>
+                        <div class="tech-tag" data-category="data-analysis" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by data analysis projects">Анализ данных</div>
+                        <div class="tech-tag" data-category="visualization" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by visualization projects">Визуализация</div>
+                        <div class="tech-tag" data-category="web" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by web development projects">Веб-разработка</div>
+                        <div class="tech-tag" data-category="computer-vision" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by computer vision projects">Компьютерное зрение</div>
+                        <div class="tech-tag" data-category="deep-learning" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by deep learning projects">Глубокое обучение</div>
+                    </div>
                 </div>
-                <div class="filter-stats" id="filter-stats" aria-live="polite"></div>
-            </div>
-            <div class="table-toolbar">
-                <div class="pagination" aria-label="Pagination controls">
-                    <button type="button" id="prev-page">Prev</button>
-                    <span class="page-info" id="page-info"></span>
-                    <button type="button" id="next-page">Next</button>
+                
+                <div class="filter-group">
+                    <h3><i class="fas fa-code" aria-hidden="true"></i> Набор технологий</h3>
+                    <div class="tech-tags" id="tech-filters" role="group" aria-label="Filter projects by technology">
+                        <div class="tech-tag active" data-tech="all" role="button" tabindex="0" aria-pressed="true" aria-label="Show all technologies">Все технологии</div>
+                        <!-- Технологии будут добавлены через JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <h3><i class="fas fa-tasks" aria-hidden="true"></i> Статус проекта</h3>
+                    <div class="tech-tags" role="group" aria-label="Filter projects by status">
+                        <div class="tech-tag active" data-status="all" role="button" tabindex="0" aria-pressed="true" aria-label="Show all statuses">Все статусы</div>
+                        <div class="tech-tag" data-status="backlog" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by backlog projects">Backlog</div>
+                        <div class="tech-tag" data-status="doing" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by doing projects">Doing</div>
+                        <div class="tech-tag" data-status="done" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by done projects">Done</div>
+                    </div>
                 </div>
             </div>
-            <table class="projects-table" id="projects-table">
-                <caption class="sr-only">Examples of projects with technologies, descriptions, dates and links</caption>
-                <colgroup>
-                    <col class="image-col">
-                    <col>
-                    <col>
-                    <col>
-                    <col>
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th scope="col" class="image-col">Preview</th>
-                        <th scope="col">Project</th>
-                        <th scope="col">Tech stack</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Link</th>
-                    </tr>
-                </thead>
-                <tbody id="projects-tbody"></tbody>
-            </table>
+
+            <div class="filter-stats" id="filter-stats" role="status" aria-live="polite" aria-atomic="true"></div>
+
+            <!-- Компактные карточки проектов -->
+            <div class="projects-grid-compact" id="projects-grid-compact" role="list" aria-label="Projects portfolio">
+                <!-- Проекты будут вставлены через JavaScript -->
+            </div>
+        </section>
+
+        <!-- Educational Vector Section -->
+        <section id="education" class="reveal" aria-labelledby="education-heading">
+            <h2 id="education-heading"><i class="fas fa-graduation-cap" aria-hidden="true"></i> ОБРАЗОВАТЕЛЬНЫЙ ВЕКТОР</h2>
+            
+            <p><i class="fas fa-info-circle"></i> Нарабатываю экспертизу в математике и статистике, совершенствую навыки программирования и осваиваю принципы машинного и глубокого обучения для решения прикладных задач.</p>
+            
+            <div class="education-cards-grid">
+                <div class="education-card">
+                    <h3 class="education-card-title">
+                        <i class="fas fa-code" aria-hidden="true"></i>
+                        Prog & Algo
+                    </h3>
+                    <div class="education-card-content">
+                        <ul class="education-card-list">
+                            <li>Освоение C++ (от базовых тем до продвинутых, включая ООП и STL)</li>
+                            <li>Повышение навыков работы с Python для data science and CV</li>
+                            <li>Решение алгоритмических задач (LeetCode, Stepik) для развития навыков решения задач</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="education-card">
+                    <h3 class="education-card-title">
+                        <i class="fas fa-chart-line" aria-hidden="true"></i>
+                        ML Math
+                    </h3>
+                    <div class="education-card-content">
+                        <ul class="education-card-list">
+                            <li>Линейная алгебра (векторы, матрицы, преобразования)</li>
+                            <li>Математический анализ (дифференцирование, интегрирование, оптимизация)</li>
+                            <li>Теория вероятностей и статистика</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="education-card">
+                    <h3 class="education-card-title">
+                        <i class="fas fa-eye" aria-hidden="true"></i>
+                        CV & DL
+                    </h3>
+                    <div class="education-card-content">
+                        <ul class="education-card-list">
+                            <li>Обработка изображений с помощью OpenCV</li>
+                            <li>Детекция объектов и классификация изображений</li>
+                            <li>Нейронные сети и фреймворки для глубокого обучения (PyTorch/TensorFlow)</li>
+                            <li>Практические проекты: распознавание лиц, сегментация изображений и другие</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="education-card">
+                    <h3 class="education-card-title">
+                        <i class="fas fa-language" aria-hidden="true"></i>
+                        English
+                    </h3>
+                    <div class="education-card-content">
+                        <ul class="education-card-list">
+                            <li>Работаю над достижением уровня B1 по английскому языку: фокусируюсь на общем и академическом лексиконе, технической терминологии, грамматике и восприятии речи на слух.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Long-term Goals Section -->
+        <section id="goals" class="reveal" aria-labelledby="goals-heading">
+            <h2 id="goals-heading"><i class="fas fa-bullseye" aria-hidden="true"></i> ЦЕЛИ И ПЛАНЫ</h2>
+            <ol class="goals-list">
+                <li>Пройти двухлетнюю магистерскую программу по AI & CV;</li>
+                <li>Получить степень в области прикладной статистики;</li>
+                <li>Разработка инновационных продуктов для глобального рынка, которые приносят реальную пользу бизнесу и обществу. Создание профессиональных, надёжных и доступных решений — в том числе open‑source‑проектов.</li>
+            </ol>
+        </section>
+
+        <!-- Current Focus Section -->
+        <section id="focus" class="reveal" aria-labelledby="focus-heading">
+            <h2 id="focus-heading"><i class="fas fa-circle-play" aria-hidden="true"></i> ТЕКУЩИЙ ФОКУС</h2>
+            
+            <div class="focus-content">
+                <p>Я развиваюсь в сфере компьютерного зрения (CV) и сейчас сосредоточен на:</p>
+                <ul class="focus-list">
+                    <li>изучении C++ для реализации высокопроизводительных CV‑алгоритмов;</li>
+                    <li>усилении математической базы, необходимой для понимания и разработки моделей CV.</li>
+                </ul>
+                
+                <p>Открыт к:</p>
+                <ul class="focus-list">
+                    <li>стажировкам в командах по компьютерному зрению;</li>
+                    <li>участию в open‑source‑проектах по CV.</li>
+                </ul>
+                
+                <p>Хочу применять знания в реальных задачах и вносить вклад в развитие сообщества.</p>
+            </div>
+
+            <div class="equipment-section">
+                <h3><i class="fas fa-desktop" aria-hidden="true"></i> Оборудование</h3>
+                <p><strong>Workstation:</strong> Dell Precision 7920 Tower, Windows 10 Pro. Linux notebook. Macbook. <a href="">[hardware.md]</a></p>
+            </div>
         </section>
     </main>
 
     <!-- Image Preview Modal -->
-    <div id="image-modal" class="image-modal" role="dialog" aria-modal="true" aria-labelledby="modal-caption">
+    <div id="image-modal" class="image-modal" role="dialog" aria-modal="true" aria-labelledby="modal-caption" aria-hidden="true">
         <div class="image-modal-content">
             <button class="image-modal-close" id="modal-close" aria-label="Close image preview" type="button">&times;</button>
-            <img id="modal-image" src="" alt="">
+            <img id="modal-image" src="" alt="" loading="lazy" decoding="async">
             <div class="image-modal-caption" id="modal-caption"></div>
+        </div>
+    </div>
+
+    <!-- Project Details Modal -->
+    <div id="projectModal" class="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" aria-hidden="true">
+        <div class="modal-content-project">
+            <div class="modal-header-project">
+                <h2 id="project-modal-title">Project Title</h2>
+                <div class="project-tech-mini" id="project-modal-tech"></div>
+                <button class="close-modal-project" id="project-modal-close" aria-label="Close project details" type="button">&times;</button>
+            </div>
+            <div class="modal-body-project">
+                <div class="project-detail-grid">
+                    <div>
+                        <div class="detail-section">
+                            <h4><i class="fas fa-info-circle"></i> Описание проекта</h4>
+                            <p id="project-modal-desc"></p>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h4><i class="fas fa-tasks"></i> Задачи проекта</h4>
+                            <p id="project-modal-tasks"></p>
+                        </div>
+                        
+                        <div class="detail-section" id="project-modal-features-section" style="display: none;">
+                            <h4><i class="fas fa-star"></i> Ключевые особенности</h4>
+                            <ul class="features-list" id="project-modal-features"></ul>
+                        </div>
+                        
+                        <div class="detail-section" id="project-modal-results-section" style="display: none;">
+                            <h4><i class="fas fa-trophy"></i> Достигнутые результаты</h4>
+                            <ul class="results-list" id="project-modal-results"></ul>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <img id="project-modal-image" src="" alt="" class="project-screenshot" loading="lazy" decoding="async">
+                        
+                        <div class="detail-section">
+                            <h4><i class="fas fa-cogs"></i> Детали</h4>
+                            <p><strong>Дата:</strong> <span id="project-modal-date"></span></p>
+                            <p><strong>Категория:</strong> <span id="project-modal-category"></span></p>
+                            <p><strong>Сложность:</strong> <span id="project-modal-difficulty"></span></p>
+                            <p><strong>Количество технологий:</strong> <span id="project-modal-tech-count"></span></p>
+                            <p><strong>Человеко-часы:</strong> <span id="project-modal-hours"></span></p>
+                        </div>
+                        
+                        <div class="detail-section" id="project-modal-metrics-section" style="display: none;">
+                            <h4><i class="fas fa-chart-line"></i> Метрики успеха</h4>
+                            <p id="project-modal-metrics"></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-links">
+                    <a href="#" class="project-link-modal" target="_blank" rel="noopener noreferrer" id="project-modal-link">
+                        <i class="fas fa-external-link-alt"></i> Открыть проект
+                    </a>
+                    <a href="#" class="project-link-modal primary" target="_blank" rel="noopener noreferrer" id="project-modal-repo">
+                        <i class="fab fa-github"></i> Исходный код
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1047,406 +672,8 @@
         </div>
     </footer>
 
-    <script>
-        // Set dynamic copyright year
-        document.addEventListener('DOMContentLoaded', function () {
-            const yearEl = document.getElementById('copyright-year');
-            if (yearEl) {
-                const currentYear = new Date().getFullYear();
-                yearEl.textContent = currentYear;
-                yearEl.setAttribute('datetime', currentYear);
-            }
-        });
-
-        // Robust reveal-on-scroll with graceful fallback
-        document.addEventListener('DOMContentLoaded', function () {
-            const sections = document.querySelectorAll('section.reveal');
-            if (!('IntersectionObserver' in window)) {
-                sections.forEach(function (s) { s.classList.add('is-visible'); });
-                return;
-            }
-            const observer = new IntersectionObserver(function (entries, obs) {
-                entries.forEach(function (entry) {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        obs.unobserve(entry.target);
-                    }
-                });
-            }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
-            sections.forEach(function (section) { observer.observe(section); });
-        });
-
-        // Projects: auto-sort by date, technology filter, pagination (5 rows per page)
-        document.addEventListener('DOMContentLoaded', function () {
-            const tbody = document.getElementById('projects-tbody');
-            if (!tbody) return;
-
-            // Project data (seeded)
-            const projects = [
-                {
-                    id: 10,
-                    title:'Create a functional but simple web portfolio',
-                    tech:['HTML', 'CSS', 'JavaScript', 'Markdown', 'GitHub Pages'],
-                    desc:'Cost-effective solution. Completion time — 2 weeks. Aesthetic design and minimalism. Scalable architecture. Autonomous solution without support for as long as necessary.',
-                    date:'2025-10-31',
-                    image:'https://raw.githubusercontent.com/KSP-Hub/assets/https/github.dev/karamin-stanislav/karamin-stanislav/image/screencapture-ksp-hub-github-io-Stanislav-Karamin-Portfolio%20Website-2025-10-30-15_04_13.png',
-                    link:'https://github.com/KSP-Hub/Stanislav-Karamin-Portfolio'
-                },
-                {
-                    id: 9,
-                    title:'Vkontakte Community-V2',
-                    tech:['VK', 'API', 'PostgreSQL', 'Dbeaver', 'SQL', 'Window Functions', 'Common Table Expression', 'CTE'],
-                    desc:'Old V1 (Difficult navigation and readability). New V2. Optimization of V1: Improved version of the code (SQL). Improved description and conclusions',
-                    date:'2025-10-19',
-                    image:'https://raw.githubusercontent.com/KSP-Hub/Tasks-Solutions-Data-Analysis/refs/heads/main/20251021T1103_Adventum_20251021T1103_Task_postgres_Script2Optimized-page-all---.gif',
-                    link:'https://raw.githubusercontent.com/KSP-Hub/Tasks-Solutions-Data-Analysis/main/20251009T1748%20-%20Script2-Optimized-SQL-CSV.rar'
-                },
-                {
-                    id: 8,
-                    title:'Vkontakte Community-V1',
-                    tech:['VK', 'API', 'PostgreSQL', 'Dbeaver', 'SQL', 'Window Functions', 'Common Table Expression', 'CTE'],
-                    desc:'Assemble: table. with the date of the posts and the number of likes; Reply: "What influences the number of likes the most"; Result: Table. CSV and SQL queries with the necessary explanations and conclusions',
-                    date:'2025-10-17',
-                    image:'https://raw.githubusercontent.com/KSP-Hub/Tasks-Solutions-Data-Analysis/refs/heads/main/20251014T1645_Adventum_20251014T1645_Task_postgres_Script-page-all---.gif',
-                    link:'https://raw.githubusercontent.com/KSP-Hub/Tasks-Solutions-Data-Analysis/main/20251009T1748%20-%20Script-SQL-CSV.rar'
-                },
-                {
-                    id: 7,
-                    title:'Analyze the Netflix platform',
-                    tech:['Anaconda', 'Python', 'Markdown', 'Jupyter'],
-                    desc:'Analyze a dataset with more than 8000 movies and TV series on the Netflix platform',
-                    date:'2025-10-07',
-                    image:'https://raw.githubusercontent.com/KSP-Hub/Tasks-Solutions-Data-Analysis/refs/heads/main/20251007%20ДЗ_02_Домашняя%20работа%20python%20Netflix%20С.П.%20Карамин---.gif',
-                    link:'https://raw.githubusercontent.com/KSP-Hub/Tasks-Solutions-Data-Analysis/refs/heads/main/20251007%20ДЗ_02_Домашняя%20работа%20python%20С.П.%20Карамин.ipynb'
-                },
-                {
-                    id:6,
-                    title:'Analytical report and visualization. Coffee sales volume in 2024-2025 in the coffee chain',
-                    tech:['BI', 'Yandex', 'Datalens', 'CSV', 'Data Visualization', 'SQL'],
-                    desc:'Offline trading. I was assigned to study sales over the last period and prepare a dashboard for management that will answer key business questions.',
-                    date:'2025-10-05',
-                    image:'https://raw.githubusercontent.com/KSP-Hub/Tasks-Solutions-Data-Analysis/refs/heads/main/20251005%20ДЗ_01.%20DataSet%20Coffe%20Sales%20DashBoard_DOC---.png',
-                    link: 'https://datalens.yandex/v1k9iwk4lxt8g'
-                },
-                {
-                    id:5,
-                    title:'Data analysis and Visualization using in a large online store',
-                    tech:['BI', 'Yandex', 'DataLens', 'CSV', 'ClickHouse', 'Data Visualization', 'SQL'],
-                    desc:'E-commerce. Analyze sales in large online store for 2007-2025 and prepare dashboard for management',
-                    date:'2025-10-02',
-                    image:'https://raw.githubusercontent.com/KSP-Hub/Tasks-Solutions-Data-Analysis/refs/heads/main/20250928%20ЛБ5%2C%20DataLens%20Dashboard%20—%20Карамин%20С.П.%20РЕШЕНИЕ%20online%20store%20sales%20for%202007-2025----.png',
-                    link:'https://datalens.yandex/28ci2emzzssen'
-                },
-                {
-                    id:4,
-                    title:'SQL queries for analyzing e-commerce transactions',
-                    tech:['PostgreSQL','DBeaver','SQL', 'Common Table Expression', 'CTE'],
-                    desc:'E-commerce transactions analysis; Deliver report in .docx.',
-                    date:'2025-09-28',
-                    image:'https://raw.githubusercontent.com/KSP-Hub/Tasks-Solutions-Data-Analysis/refs/heads/main/20250928%20ЛБ4.%20E-commerce-transactions-dataset%20—%20РЕШЕНИЕ.%20С.%20П.%20Карамин_page_all---.gif',
-                    link:'https://raw.githubusercontent.com/karamin-stanislav/Tasks-Solutions-Data-Analysis/main/20250928%20%D0%9B%D0%914%20E-commerce-transactions-dataset%20%E2%80%94%20%D0%A0%D0%95%D0%A8%D0%95%D0%9D%D0%98%D0%95.%20%D0%A1.%20%D0%9F.%20%D0%9A%D0%B0%D1%80%D0%B0%D0%BC%D0%B8%D0%BD.docx'
-                },
-                {
-                    id:3,
-                    title:'Fundamentals of statistics in Excel',
-                    tech:['Excel', 'Statistics', 'Probability Theory', 'Hypothesis', 'Regression', 'Correlation', 'Data Visualization', 'Microsoft'],
-                    desc:'Comprehensive statistical analysis of company sales for 2021-2023, trends and hypotheses.',
-                    date:'2025-09-26',
-                    image:'https://raw.githubusercontent.com/KSP-Hub/Tasks-Solutions-Data-Analysis/refs/heads/main/20250926%20ЛБ3.%20Excel.%20С.П.%20Карамин%20РЕШЕНИЕ---.gif',
-                    link:'https://raw.githubusercontent.com/karamin-stanislav/Tasks-Solutions-Data-Analysis/main/20250926%20%D0%9B%D0%913.%20Excel.%20%D0%A1.%D0%9F.%20%D0%9A%D0%B0%D1%80%D0%B0%D0%BC%D0%B8%D0%BD%20%D0%A0%D0%95%D0%A8%D0%95%D0%9D%D0%98%D0%95.xlsx'
-                },
-                {
-                    id:2,
-                    title:'Analyze data in Jupyter Notebook in Python',
-                    tech:['Anaconda','Python','Jupyter','Pandas','Numpy','Matplotlib'],
-                    desc:'Task 1: Create Series, clean DataFrame, analyze data. Task 2: Research borrowers with pandas, numpy, matplotlib',
-                    date:'2025-09-15',
-                    image:'https://raw.githubusercontent.com/KSP-Hub/Tasks-Solutions-Data-Analysis/refs/heads/main/20250915%20ЛБ2.%20Основы%20анализа%20данных%20в%20Python.%20РЕШЕНИЕ.%20С.%20П.%20Карамин.%2007.10.2025_page-0001_1_5sek---.gif',
-                    link:'https://raw.githubusercontent.com/karamin-stanislav/Tasks-Solutions-Data-Analysis/main/20250915%20%D0%9B%D0%912.%20%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20%D0%B0%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85%20%D0%B2%20Python.%20%D0%A0%D0%95%D0%A8%D0%95%D0%9D%D0%98%D0%95.%20%D0%A1.%20%D0%9F.%20%D0%9A%D0%B0%D1%80%D0%B0%D0%BC%D0%B8%D0%BD.%2007.10.2025.ipynb'
-                },  
-                {
-                    id: 1,
-                    title:'Data collection, processing, and structuring in Jupyter Notebook in Python',
-                    tech:['Anaconda','Python','Jupyter', 'Openpyxl', 'Docx'],
-                    desc:'Working with the "openpyxl, docx" modules in Jupyter notebook',
-                    date:'2025-09-09',
-                    image:'https://raw.githubusercontent.com/KSP-Hub/Tasks-Solutions-Data-Analysis/refs/heads/main/20250909%20ЛБ1.%20Сбор%2C%20обработка%20и%20структурирование%20данных%20С.%20П.%20Карамин%202025%20РЕШЕНИЕ_page_all_1_5sek---.gif',
-                    link:'https://raw.githubusercontent.com/karamin-stanislav/Tasks-Solutions-Data-Analysis/main/20250909%20%D0%9B%D0%90%D0%911.%20%D0%A1%D0%B1%D0%BE%D1%80%2C%20%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D0%B8%20%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85%20%D0%A1.%20%D0%9F.%20%D0%9A%D0%B0%D1%80%D0%B0%D0%BC%D0%B8%D0%BD%202025%20%D0%A0%D0%95%D0%A8%D0%95%D0%9D%D0%98%D0%95.ipynb'
-                }
-            ];
-
-            // Sort by date desc
-            projects.sort(function (a, b) { return b.date.localeCompare(a.date); });
-
-            // Build technology chips from data
-            const techMap = new Map();
-            projects.forEach(function (p) { p.tech.forEach(function (t) { const k=t.toLowerCase(); if (!techMap.has(k)) techMap.set(k,t); }); });
-
-            const chipsContainer = document.getElementById('tech-chips');
-            const selected = new Set();
-            function renderChips() {
-                chipsContainer.innerHTML = '';
-                // "All" chip
-                const allChip = document.createElement('button');
-                allChip.type = 'button';
-                allChip.className = 'chip selected';
-                allChip.textContent = 'All';
-                allChip.setAttribute('aria-pressed', 'true');
-                allChip.addEventListener('click', function () {
-                    selected.clear();
-                    Array.from(chipsContainer.querySelectorAll('.chip')).forEach(function (c) { c.classList.remove('selected'); c.setAttribute('aria-pressed', 'false'); });
-                    allChip.classList.add('selected');
-                    allChip.setAttribute('aria-pressed', 'true');
-                    currentPage = 1; applyFilter();
-                });
-                chipsContainer.appendChild(allChip);
-
-                techMap.forEach(function (label, key) {
-                    const chip = document.createElement('button');
-                    chip.type = 'button';
-                    chip.className = 'chip';
-                    chip.textContent = label;
-                    chip.setAttribute('data-tech', key);
-                    chip.setAttribute('aria-pressed', 'false');
-                    chip.addEventListener('click', function () {
-                        // Toggle
-                        const isSelected = chip.classList.toggle('selected');
-                        chip.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
-                        if (isSelected) {
-                            selected.add(key);
-                        } else {
-                            selected.delete(key);
-                        }
-                        // Unselect "All" when any tech selected
-                        const first = chipsContainer.querySelector('.chip:first-child');
-                        if (first && first !== chip) { first.classList.remove('selected'); first.setAttribute('aria-pressed', 'false'); }
-                        currentPage = 1; applyFilter();
-                    });
-                    chipsContainer.appendChild(chip);
-                });
-            }
-
-            // Pagination
-            const PAGE_SIZE = 5;
-            let currentPage = 1;
-
-            function getFilteredProjects() {
-                const active = Array.from(selected);
-                if (active.length === 0) return projects;
-                return projects.filter(function (p) {
-                    const text = p.tech.join(',').toLowerCase();
-                    return active.some(function (k) { return text.indexOf(k) !== -1; });
-                });
-            }
-
-            // XSS protection: escape HTML special characters
-            function escapeHtml(text) {
-                const div = document.createElement('div');
-                div.textContent = text;
-                return div.innerHTML;
-            }
-
-            function renderTable() {
-                const filtered = getFilteredProjects();
-                const total = filtered.length;
-                const start = (currentPage - 1) * PAGE_SIZE;
-                const pageItems = filtered.slice(start, start + PAGE_SIZE);
-                tbody.innerHTML = pageItems.map(function (p) {
-                    const tech = escapeHtml(p.tech.join(', '));
-                    const date = escapeHtml(p.date);
-                    const title = escapeHtml(p.title);
-                    const desc = escapeHtml(p.desc);
-                    const imageUrl = escapeHtml(p.image);
-                    const linkUrl = escapeHtml(p.link);
-                    const linkHtml = p.link.startsWith('http') ? `<a href="${linkUrl}" class="project-link" target="_blank" rel="noopener noreferrer">Open</a>` : `<a href="${linkUrl}" class="project-link">Open</a>`;
-                    return `<tr>
-                        <td data-label="Preview" class="image-col"><img class="thumb" src="${imageUrl}" alt="${title}" width="160" height="120" loading="lazy" decoding="async" data-image-src="${imageUrl}" data-image-title="${title}"></td>
-                        <td data-label="Project"><strong>${title}</strong></td>
-                        <td data-label="Tech stack">${tech}</td>
-                        <td data-label="Description">${desc}</td>
-                        <td data-label="Date"><time datetime="${date}">${date}</time></td>
-                        <td data-label="Link">${linkHtml}</td>
-                    </tr>`;
-                }).join('');
-
-                // Attach click handlers to images
-                tbody.querySelectorAll('img.thumb').forEach(function(img) {
-                    // Add error handling for failed image loads
-                    img.addEventListener('error', function() {
-                        this.src = 'https://via.placeholder.com/160x120?text=Image+Not+Available';
-                        this.alt = 'Image not available';
-                    });
-                    
-                    img.addEventListener('click', function() {
-                        openImageModal(img.getAttribute('data-image-src'), img.getAttribute('data-image-title'));
-                    });
-                    img.setAttribute('role', 'button');
-                    img.setAttribute('tabindex', '0');
-                    img.setAttribute('aria-label', 'Click to enlarge: ' + img.getAttribute('alt'));
-                    img.addEventListener('keydown', function(e) {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            openImageModal(img.getAttribute('data-image-src'), img.getAttribute('data-image-title'));
-                        }
-                    });
-                });
-
-                // Update page info
-                const pageInfo = document.getElementById('page-info');
-                const prevBtn = document.getElementById('prev-page');
-                const nextBtn = document.getElementById('next-page');
-                const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
-                if (currentPage > totalPages) currentPage = totalPages;
-                if (pageInfo) {
-                    pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
-                }
-                if (prevBtn) prevBtn.disabled = currentPage <= 1;
-                if (nextBtn) nextBtn.disabled = currentPage >= totalPages;
-
-                // Update filter stats
-                const stats = document.getElementById('filter-stats');
-                if (stats) {
-                    stats.textContent = (total === projects.length) ? '' : (`${total} of ${projects.length} shown`);
-                }
-            }
-
-            document.getElementById('prev-page').addEventListener('click', function(){ if (currentPage > 1) { currentPage--; renderTable(); }});
-            document.getElementById('next-page').addEventListener('click', function(){ currentPage++; renderTable(); });
-
-            function applyFilter() { renderTable(); }
-
-            renderChips();
-            renderTable();
-
-            // Light placeholder updates for analytics boxes (no tracking)
-            // No test/random data. If you configure GA worker endpoint below, monthly stats will load.
-        });
-
-        // Image Modal functionality
-        function openImageModal(imageSrc, imageTitle) {
-            const modal = document.getElementById('image-modal');
-            const modalImg = document.getElementById('modal-image');
-            const modalCaption = document.getElementById('modal-caption');
-            
-            if (!modal || !modalImg) return;
-            
-            modalImg.src = imageSrc;
-            modalImg.alt = imageTitle || 'Project preview';
-            modalCaption.textContent = imageTitle || '';
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent body scroll
-            
-            // Add error handling for modal image
-            modalImg.onerror = function() {
-                this.src = 'https://via.placeholder.com/800x600?text=Image+Not+Available';
-                this.alt = 'Image not available';
-            };
-            
-            // Focus management for accessibility
-            const closeBtn = document.getElementById('modal-close');
-            if (closeBtn) closeBtn.focus();
-        }
-
-        function closeImageModal() {
-            const modal = document.getElementById('image-modal');
-            if (modal) {
-                modal.classList.remove('active');
-                document.body.style.overflow = ''; // Restore body scroll
-            }
-        }
-
-        // Modal event handlers
-        document.addEventListener('DOMContentLoaded', function() {
-            const modal = document.getElementById('image-modal');
-            const closeBtn = document.getElementById('modal-close');
-            
-            if (closeBtn) {
-                closeBtn.addEventListener('click', closeImageModal);
-            }
-            
-            if (modal) {
-                // Close on backdrop click
-                modal.addEventListener('click', function(e) {
-                    if (e.target === modal) {
-                        closeImageModal();
-                    }
-                });
-                
-                // Close on Escape key
-                document.addEventListener('keydown', function(e) {
-                    if (e.key === 'Escape' && modal.classList.contains('active')) {
-                        closeImageModal();
-                    }
-                });
-            }
-        });
-
-        // Consent and analytics loaders
-        (function(){
-            var YM_ID = '';
-            var GA_ID = 'G-RRWNG4DZE1';
-
-            function showBanner() {
-                var banner = document.getElementById('consent-banner');
-                if (banner) banner.style.display = 'block';
-            }
-            function hideBanner() {
-                var banner = document.getElementById('consent-banner');
-                if (banner) banner.style.display = 'none';
-            }
-            // We no longer auto-load Yandex here; rely on your head snippet/counter.
-            function loadGA() {
-                try {
-                    var s = document.createElement('script');
-                    s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
-                    document.head.appendChild(s);
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    window.gtag = gtag;
-                    gtag('js', new Date());
-                    gtag('config', GA_ID);
-                } catch(e) {}
-            }
-            function initConsent() {
-                var stored = localStorage.getItem('analyticsConsent');
-                if (stored === 'accepted') { loadGA(); return; }
-                if (stored === 'declined') { return; }
-                showBanner();
-                var accept = document.getElementById('consent-accept');
-                var decline = document.getElementById('consent-decline');
-                if (accept) accept.addEventListener('click', function(){ localStorage.setItem('analyticsConsent','accepted'); hideBanner(); loadGA(); });
-                if (decline) decline.addEventListener('click', function(){ localStorage.setItem('analyticsConsent','declined'); hideBanner(); });
-            }
-            document.addEventListener('DOMContentLoaded', initConsent);
-        })();
-
-        // Optional: Monthly stats via GA worker (set your endpoint URL)
-        (function(){
-            const GA_STATS_ENDPOINT = ''; // e.g. 'https://your-worker-subdomain.workers.dev/stats'
-            async function updateMonthly() {
-                if (!GA_STATS_ENDPOINT) return;
-                try {
-                    const res = await fetch(GA_STATS_ENDPOINT, { cache: 'no-store' });
-                    if (!res.ok) return;
-                    const data = await res.json();
-                    const totalUsers = data.totalUsers ?? null;
-                    const sessions = data.sessions ?? null;
-                    const views = data.pageviews ?? sessions; // fallback to sessions if pageviews not provided
-
-                    const set = (id, val) => { const el = document.getElementById(id); if (el && val != null) el.textContent = String(val); };
-                    // Update both boxes with monthly aggregates
-                    set('ga-users', totalUsers);
-                    set('ga-views', views);
-                    set('ga-total-users', totalUsers);
-                    set('ym-visitors', totalUsers);
-                    set('ym-views', views);
-                    set('ym-total-users', totalUsers);
-                } catch(e) {}
-            }
-            document.addEventListener('DOMContentLoaded', updateMonthly);
-            setInterval(updateMonthly, 300000);
-        })();
-    </script>
+    <!-- Main JavaScript -->
+    <script src="js/main.js" defer></script>
 </body>
 </html>
 
