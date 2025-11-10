@@ -1,0 +1,41 @@
+{
+  "name": "stanislav-karamin-portfolio",
+  "version": "2.0.0",
+  "description": "Portfolio website for Stanislav Karamin - Programmer-Analyst, Technical Vision Engineer (Computer Vision, CV)",
+  "main": "index.html",
+  "scripts": {
+    "update-sitemap": "node scripts/update-sitemap.js",
+    "lint": "eslint js/*.js",
+    "lint:fix": "eslint js/*.js --fix",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "keywords": [
+    "portfolio",
+    "data-analyst",
+    "programmer-analyst",
+    "python",
+    "sql",
+    "bi",
+    "AI",
+    "Artificial Intelligence",
+    "CV",
+    "Computer vision",
+    "Deep learning"
+  ],
+  "author": "Stanislav Karamin",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "jest": "^29.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KSP-Hub/Stanislav-Karamin-Portfolio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KSP-Hub/Stanislav-Karamin-Portfolio/issues"
+  },
+  "homepage": "https://ksp-hub.github.io/Stanislav-Karamin-Portfolio/"
+}
+

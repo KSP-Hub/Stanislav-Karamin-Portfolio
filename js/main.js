@@ -7,6 +7,24 @@
     'use strict';
 
     // ============================================
+    // Configuration
+    // ============================================
+    
+    // Use CONFIG from config.js if available, otherwise use defaults
+    const CONFIG = window.CONFIG || {
+        images: {
+            placeholder: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'%3E%3Crect fill=\'%23f0f0f0\' width=\'400\' height=\'300\'/%3E%3Ctext fill=\'%23999\' font-family=\'sans-serif\' font-size=\'18\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\'%3EИзображение загружается...%3C/text%3E%3C/svg%3E',
+            errorPlaceholder: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'%3E%3Crect fill=\'%23f8f8f8\' width=\'400\' height=\'300\'/%3E%3Ctext fill=\'%23ccc\' font-family=\'sans-serif\' font-size=\'16\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\'%3EИзображение недоступно%3C/text%3E%3C/svg%3E',
+            lazyLoadThreshold: '100px'
+        },
+        errorTracking: {
+            enabled: false,
+            logToConsole: true,
+            showNotifications: true
+        }
+    };
+
+    // ============================================
     // Utility Functions
     // ============================================
     
@@ -20,6 +38,125 @@
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
+    }
+    
+    /**
+     * Handle image load error with fallback and user notification
+     * @param {HTMLImageElement} img - Image element
+     * @param {string} altText - Alt text for the image
+     * @param {boolean} showNotification - Whether to show notification to user
+     */
+    function handleImageError(img, altText = 'Изображение', showNotification = false) {
+        try {
+            // Set error placeholder from config
+            const errorPlaceholder = CONFIG.images?.errorPlaceholder || 
+                'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'%3E%3Crect fill=\'%23f8f8f8\' width=\'400\' height=\'300\'/%3E%3Ctext fill=\'%23ccc\' font-family=\'sans-serif\' font-size=\'16\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\'%3EИзображение недоступно%3C/text%3E%3C/svg%3E';
+            
+            img.src = errorPlaceholder;
+            img.alt = `${altText} (недоступно)`;
+            img.classList.add('image-error');
+            
+            // Log error if enabled
+            if (CONFIG.errorTracking?.logToConsole) {
+                console.warn(`Image failed to load: ${img.src}`, {
+                    alt: altText,
+                    originalSrc: img.dataset.originalSrc || 'unknown'
+                });
+            }
+            
+            // Show notification if enabled
+            if (showNotification && CONFIG.errorTracking?.showNotifications && typeof showNotification === 'function') {
+                showNotification(`Изображение "${altText}" не удалось загрузить`);
+            }
+        } catch (e) {
+            console.error('Error in handleImageError:', e);
+        }
+    }
+    
+    /**
+     * Setup image with loading placeholder and error handling
+     * @param {HTMLImageElement} img - Image element
+     * @param {string} src - Image source URL
+     * @param {string} alt - Alt text
+     * @param {boolean} showNotification - Whether to show notification on error
+     */
+    function setupImage(img, src, alt = '', showNotification = false) {
+        try {
+            // Store original source
+            img.dataset.originalSrc = src;
+            
+            // Set loading placeholder
+            const placeholder = CONFIG.images?.placeholder || 
+                'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'%3E%3Crect fill=\'%23f0f0f0\' width=\'400\' height=\'300\'/%3E%3Ctext fill=\'%23999\' font-family=\'sans-serif\' font-size=\'18\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\'%3EИзображение загружается...%3C/text%3E%3C/svg%3E';
+            
+            img.src = placeholder;
+            img.alt = alt;
+            img.classList.add('image-loading');
+            
+            // Create new image to preload
+            const preloadImg = new Image();
+            preloadImg.onload = function() {
+                img.src = src;
+                img.alt = alt;
+                img.classList.remove('image-loading');
+                img.classList.add('image-loaded');
+            };
+            preloadImg.onerror = function() {
+                handleImageError(img, alt, showNotification);
+            };
+            preloadImg.src = src;
+        } catch (e) {
+            console.error('Error in setupImage:', e);
+            handleImageError(img, alt, showNotification);
+        }
+    }
+    
+    /**
+     * Setup lazy loading for image using Intersection Observer
+     * @param {HTMLImageElement} img - Image element
+     * @param {string} src - Image source URL
+     * @param {string} alt - Alt text
+     */
+    function setupLazyImage(img, src, alt = '') {
+        try {
+            // Store original source in data attribute
+            img.dataset.src = src;
+            img.alt = alt;
+            img.classList.add('image-lazy');
+            
+            // Set loading placeholder
+            const placeholder = CONFIG.images?.placeholder || 
+                'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'%3E%3Crect fill=\'%23f0f0f0\' width=\'400\' height=\'300\'/%3E%3Ctext fill=\'%23999\' font-family=\'sans-serif\' font-size=\'18\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\'%3EИзображение загружается...%3C/text%3E%3C/svg%3E';
+            img.src = placeholder;
+            
+            // Use Intersection Observer if available
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const image = entry.target;
+                            const imageSrc = image.dataset.src;
+                            
+                            if (imageSrc) {
+                                setupImage(image, imageSrc, image.alt, false);
+                                observer.unobserve(image);
+                            }
+                        }
+                    });
+                }, {
+                    rootMargin: CONFIG.images?.lazyLoadThreshold || '100px'
+                });
+                
+                observer.observe(img);
+            } else {
+                // Fallback: load immediately if Intersection Observer not supported
+                setupImage(img, src, alt, false);
+            }
+        } catch (e) {
+            console.error('Error in setupLazyImage:', e);
+            // Fallback: try to load image normally
+            setupImage(img, src, alt, false);
+        }
     }
 
     /**
@@ -228,7 +365,7 @@
             link: '',
             repo: '',
             hours: 15,
-            status: 'doing',
+            status: 'ongoing',
             features: ['Детекция одиночных и множественных лиц', 'Визуализация bounding boxes', 'Оценка точности детекции', 'Обработка различных ракурсов'],
             results: [
                 'Рабочий детектор лиц с точностью ~85% на тестовых изображениях',
@@ -256,7 +393,8 @@
                 'Создан полностью адаптивный дизайн для всех устройств',
                 'Реализована система фильтрации проектов с debounce оптимизацией',
                 'Достигнута оценка 100/100 по SEO и доступности',
-                'Интегрированы Yandex.Metrica и Google Analytics с согласием пользователя'
+                'Интегрированы Yandex.Metrica и Google Analytics с согласием пользователя',
+                'Уровень проработки проекта позволяет характеризовать его как идеальный. Отмечена внимательность к деталям: корректно задан масштаб страницы (35 %).',
             ]
         },
         {
@@ -520,6 +658,9 @@
             this.currentPage = 1; // Сброс страницы при изменении фильтра
             this.debouncedRender();
             this.updateFilterStats();
+            
+            // Track event
+            trackEvent('Filters', 'category_filter', tag.dataset.category);
         }
 
         handleStatusClick(tag) {
@@ -539,6 +680,9 @@
             
             this.debouncedRender();
             this.updateFilterStats();
+            
+            // Track event
+            trackEvent('Filters', 'status_filter', status);
         }
 
         handleTechClick(tag) {
@@ -584,6 +728,9 @@
             this.currentPage = 1; // Сброс страницы при изменении фильтра
             this.debouncedRender();
             this.updateFilterStats();
+            
+            // Track event
+            trackEvent('Filters', 'tech_filter', tech);
         }
 
         filterProjects() {
@@ -595,8 +742,11 @@
 
                 // Status filter
                 if (this.activeFilters.status !== 'all') {
-                    const projectStatus = project.status || 'done';
-                    if (projectStatus !== this.activeFilters.status) {
+                    // Нормализуем статус проекта: приводим к нижнему регистру и обрезаем пробелы
+                    const projectStatus = (project.status || 'done').toLowerCase().trim();
+                    // Нормализуем фильтр: приводим к нижнему регистру и обрезаем пробелы
+                    const filterStatus = this.activeFilters.status.toLowerCase().trim();
+                    if (projectStatus !== filterStatus) {
                         return false;
                     }
                 }
@@ -637,22 +787,39 @@
             const endIndex = startIndex + this.projectsPerPage;
             const projectsToShow = filteredProjects.slice(startIndex, endIndex);
 
+            // Если проекты не найдены, показать сообщение
+            if (filteredProjects.length === 0) {
+                grid.innerHTML = `
+                    <div class="no-projects-message" role="alert" aria-live="polite">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                        <h3>Проекты не найдены</h3>
+                        <p>Попробуйте изменить параметры фильтрации</p>
+                    </div>
+                `;
+                this.renderPagination(0, 0);
+                hideLoadingIndicator();
+                return;
+            }
+
             grid.innerHTML = projectsToShow.map(project => {
                 const title = escapeHtml(project.title);
                 const desc = escapeHtml(project.description);
                 const tech = project.technologies.map(t => escapeHtml(t));
                 const hasHours = project.hours && project.hours > 0;
-                const status = project.status || 'done';
+                // Нормализуем статус: приводим к нижнему регистру
+                const status = (project.status || 'done').toLowerCase().trim();
+                // Для CSS классов используем статус как есть (без пробелов)
                 const statusClass = `status-${status}`;
                 const statusMap = {
                     'backlog': 'Backlog',
-                    'doing': 'Doing',
+                    'ongoing': 'Ongoing',
                     'done': 'Done'
                 };
                 const statusText = statusMap[status] || 'Done';
                 
                 return `
                     <div class="project-card-compact ${statusClass}" 
+                         data-project-id="${project.id}"
                          onclick="openProjectModal(${project.id})" 
                          role="button" 
                          tabindex="0" 
@@ -672,6 +839,13 @@
                         <div class="project-preview-mini">${desc}</div>
                         <div class="project-meta-mini">
                             <div class="project-date-mini">${new Date(project.date).toLocaleDateString('ru-RU')}</div>
+                            <div class="project-id-views-group">
+                                <div class="project-id-badge" title="Project ID">No. ${project.id}</div>
+                                <div class="project-views-mini" title="Количество просмотров">
+                                    <i class="fas fa-eye" aria-hidden="true"></i>
+                                    <span data-views-count="${project.id}">${getProjectViews(project.id)}</span>
+                                </div>
+                            </div>
                             <div class="click-hint">Click for details →</div>
                         </div>
                     </div>
@@ -689,6 +863,22 @@
 
             // Рендеринг пагинации
             this.renderPagination(totalProjects, totalPages);
+            
+            // Hide loading indicator
+            hideLoadingIndicator();
+            
+            // КРИТИЧНО: Нормализуем данные ПЕРЕД обновлением счетчиков
+            // Это гарантирует, что мы работаем с правильными данными
+            normalizeProjectViewsData();
+            
+            // Обновляем счетчики просмотров в карточках после рендеринга
+            // Используем requestAnimationFrame + setTimeout для гарантии, что DOM полностью обновлен
+            // Это гарантирует, что счетчики всегда отображают актуальные значения из localStorage
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    updateProjectViewsInCards();
+                }, 0);
+            });
         }
 
         renderPagination(totalProjects, totalPages) {
@@ -753,17 +943,20 @@
                 const desc = escapeHtml(project.description);
                 const tech = project.technologies.map(t => escapeHtml(t));
                 const hasHours = project.hours && project.hours > 0;
-                const status = project.status || 'done';
+                // Нормализуем статус: приводим к нижнему регистру
+                const status = (project.status || 'done').toLowerCase().trim();
+                // Для CSS классов используем статус как есть (без пробелов)
                 const statusClass = `status-${status}`;
                 const statusMap = {
                     'backlog': 'Backlog',
-                    'doing': 'Doing',
+                    'ongoing': 'Ongoing',
                     'done': 'Done'
                 };
                 const statusText = statusMap[status] || 'Done';
                 
                 return `
                     <div class="project-card-compact ${statusClass}" 
+                         data-project-id="${project.id}"
                          onclick="openProjectModal(${project.id})" 
                          role="button" 
                          tabindex="0" 
@@ -783,6 +976,13 @@
                         <div class="project-preview-mini">${desc}</div>
                         <div class="project-meta-mini">
                             <div class="project-date-mini">${new Date(project.date).toLocaleDateString('ru-RU')}</div>
+                            <div class="project-id-views-group">
+                                <div class="project-id-badge" title="Project ID">No. ${project.id}</div>
+                                <div class="project-views-mini" title="Количество просмотров">
+                                    <i class="fas fa-eye" aria-hidden="true"></i>
+                                    <span data-views-count="${project.id}">${getProjectViews(project.id)}</span>
+                                </div>
+                            </div>
                             <div class="click-hint">Click for details →</div>
                         </div>
                     </div>
@@ -790,6 +990,16 @@
             }).join('');
 
             grid.insertAdjacentHTML('beforeend', newProjectsHTML);
+
+            // КРИТИЧНО: Обновляем счетчики просмотров в новых карточках
+            // Нормализуем данные и обновляем отображение для гарантии единого подсчета
+            // Используем requestAnimationFrame + setTimeout для гарантии, что DOM полностью обновлен
+            // Нормализация происходит внутри updateProjectViewsInCards()
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    updateProjectViewsInCards();
+                }, 0);
+            });
 
             // Обновляем пагинацию
             this.renderPagination(totalProjects, totalPages);
@@ -815,12 +1025,25 @@
             const totalCount = projectsData.length;
             const shownCount = Math.min(this.currentPage * this.projectsPerPage, filteredCount);
             
-            if (filteredCount < totalCount || filteredCount > this.projectsPerPage) {
-                stats.textContent = `Показано ${shownCount} из ${filteredCount} проектов${filteredCount < totalCount ? ` (всего ${totalCount})` : ''}`;
+            // Убираем класс error если он был
+            stats.classList.remove('error');
+            
+            if (filteredCount === 0) {
+                stats.textContent = `Проекты не найдены`;
+                stats.classList.add('show', 'error');
+                stats.setAttribute('aria-live', 'assertive');
+            } else if (filteredCount === totalCount && shownCount >= filteredCount) {
+                stats.textContent = `Всего проектов: ${totalCount}`;
+                stats.classList.add('show');
+                stats.setAttribute('aria-live', 'polite');
+            } else if (shownCount >= filteredCount) {
+                stats.textContent = `Найдено: ${filteredCount} из ${totalCount}`;
                 stats.classList.add('show');
                 stats.setAttribute('aria-live', 'polite');
             } else {
-                stats.classList.remove('show');
+                stats.textContent = `Показано: ${shownCount} из ${filteredCount} (всего: ${totalCount})`;
+                stats.classList.add('show');
+                stats.setAttribute('aria-live', 'polite');
             }
         }
     }
@@ -835,6 +1058,9 @@
             console.error('Project not found:', projectId);
             return;
         }
+        
+        // Увеличиваем счетчик просмотров
+        incrementProjectViews(projectId);
         
         const modal = document.getElementById('projectModal');
         if (!modal) return;
@@ -900,11 +1126,35 @@
             
             if (linkEl) {
                 if (project.link && project.link.trim() !== '') {
-                    linkEl.href = project.link;
-                    linkEl.style.display = 'flex';
-                    linkEl.setAttribute('aria-label', `Open project: ${project.title}`);
+                linkEl.href = project.link;
+                    linkEl.classList.remove('project-link-hidden');
+                linkEl.setAttribute('aria-label', `Open project: ${project.title}`);
                 } else {
-                    linkEl.style.display = 'none';
+                    linkEl.classList.add('project-link-hidden');
+                }
+            }
+            
+            // Repo link
+            const repoEl = document.getElementById('project-modal-repo');
+            if (repoEl) {
+                if (project.repo && project.repo.trim() !== '') {
+                    repoEl.href = project.repo;
+                    repoEl.classList.remove('project-link-hidden');
+                    repoEl.setAttribute('aria-label', `View repository: ${project.title}`);
+                } else {
+                    repoEl.classList.add('project-link-hidden');
+                }
+            }
+            
+            // Image handling
+            const imageEl = document.getElementById('project-modal-image');
+            if (imageEl) {
+                if (project.image && project.image.trim() !== '') {
+                    imageEl.src = project.image;
+                    imageEl.alt = project.title;
+                    imageEl.classList.remove('project-link-hidden');
+                } else {
+                    imageEl.classList.add('project-link-hidden');
                 }
             }
             
@@ -920,9 +1170,15 @@
                         </li>`
                     ).join('');
                 }
-                if (resultsSection) resultsSection.style.display = 'block';
+                if (resultsSection) {
+                    resultsSection.classList.remove('modal-section-hidden');
+                    resultsSection.classList.add('modal-section-visible');
+                }
             } else {
-                if (resultsSection) resultsSection.style.display = 'none';
+                if (resultsSection) {
+                    resultsSection.classList.add('modal-section-hidden');
+                    resultsSection.classList.remove('modal-section-visible');
+                }
             }
             
             // Features section
@@ -934,9 +1190,15 @@
                         `<li>${escapeHtml(feature)}</li>`
                     ).join('');
                 }
-                if (featuresSection) featuresSection.style.display = 'block';
+                if (featuresSection) {
+                    featuresSection.classList.remove('modal-section-hidden');
+                    featuresSection.classList.add('modal-section-visible');
+                }
             } else {
-                if (featuresSection) featuresSection.style.display = 'none';
+                if (featuresSection) {
+                    featuresSection.classList.add('modal-section-hidden');
+                    featuresSection.classList.remove('modal-section-visible');
+                }
             }
             
             // Metrics section
@@ -947,15 +1209,24 @@
                 if (metricsText) {
                     metricsText.textContent = project.metrics;
                 }
-                if (metricsSection) metricsSection.style.display = 'block';
+                if (metricsSection) {
+                    metricsSection.classList.remove('modal-section-hidden');
+                    metricsSection.classList.add('modal-section-visible');
+                }
             } else if (project.results && Array.isArray(project.results) && project.results.length > 0) {
                 // Auto-generate metrics based on results count
                 if (metricsText) {
                     metricsText.textContent = `Проект включает ${project.results.length} ключевых результата, демонстрирующих измеримое воздействие на бизнес-процессы и пользовательский опыт.`;
                 }
-                if (metricsSection) metricsSection.style.display = 'block';
+                if (metricsSection) {
+                    metricsSection.classList.remove('modal-section-hidden');
+                    metricsSection.classList.add('modal-section-visible');
+                }
             } else {
-                if (metricsSection) metricsSection.style.display = 'none';
+                if (metricsSection) {
+                    metricsSection.classList.add('modal-section-hidden');
+                    metricsSection.classList.remove('modal-section-visible');
+                }
             }
             
             // Technologies in header
@@ -966,18 +1237,16 @@
                 ).join('');
             }
             
-            // Image
+            // Image with improved error handling and lazy loading
             const modalImage = document.getElementById('project-modal-image');
             if (modalImage) {
                 if (project.image && project.image.trim() !== '') {
-                    modalImage.src = project.image;
-                    modalImage.alt = project.title;
-                    modalImage.onclick = () => openImageModal(project.image, project.title);
+                    // Use lazy loading for modal images (GIF support)
+                    setupLazyImage(modalImage, project.image, project.title);
+                modalImage.onclick = () => openImageModal(project.image, project.title);
                     modalImage.style.display = 'block';
-                    modalImage.onerror = function() {
-                        this.src = 'https://via.placeholder.com/800x600?text=Image+Not+Available';
-                        this.alt = 'Image not available';
-                    };
+                    modalImage.style.cursor = 'pointer';
+                    modalImage.title = 'Нажмите для просмотра в полном размере';
                 } else {
                     modalImage.style.display = 'none';
                 }
@@ -999,6 +1268,9 @@
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
             
+            // Focus trap for accessibility
+            trapFocus(modal);
+            
             // Focus management for accessibility
             const closeBtn = document.getElementById('project-modal-close');
             if (closeBtn) {
@@ -1007,17 +1279,27 @@
             
             // Update ARIA attributes
             modal.setAttribute('aria-hidden', 'false');
+            
+            // Track event
+            trackEvent('Projects', 'open_modal', project.title);
         } catch (error) {
             console.error('Error opening project modal:', error);
+            showNotification('Ошибка при открытии проекта. Попробуйте еще раз.', 'error');
         }
     };
 
     function closeProjectModal() {
         const modal = document.getElementById('projectModal');
         if (modal) {
+            // Remove focus trap
+            removeFocusTrap();
+            
             modal.classList.remove('active');
             modal.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = '';
+            
+            // Track event
+            trackEvent('Projects', 'close_modal', '');
         }
     }
 
@@ -1175,19 +1457,62 @@
     // Currently disabled because no backend endpoint is configured.
     
     function initAnalyticsStats() {
-        // TODO: Configure your analytics API endpoint here
-        // Example: const GA_STATS_ENDPOINT = 'https://your-api.com/analytics/stats';
+        // ============================================
+        // Analytics API Endpoint Configuration
+        // ============================================
+        // INSTRUCTIONS FOR CONFIGURING ANALYTICS API:
+        // 
+        // For a static GitHub Pages site, you need to set up a backend API endpoint:
+        // 
+        // Option 1: Serverless Function (Recommended)
+        //   - Use services like Vercel, Netlify Functions, or AWS Lambda
+        //   - Create an API endpoint that queries Google Analytics/Yandex.Metrica APIs
+        //   - The endpoint should return JSON in format: 
+        //     {
+        //       "yandex": { "visitors": 0, "views": 0, "totalUsers": 0 },
+        //       "google": { "users": 0, "sessions": 0, "pageviews": 0 }
+        //     }
+        // 
+        // Option 2: Third-party Analytics Service
+        //   - Use services like Plausible, Simple Analytics, or similar
+        //   - Configure their API endpoint here
+        // 
+        // Option 3: Manual Updates
+        //   - Leave endpoint empty and update stats manually in HTML if needed
+        // 
+        // Example endpoint URL:
+        //   const GA_STATS_ENDPOINT = 'https://your-api.vercel.app/api/analytics/stats';
+        //   const GA_STATS_ENDPOINT = 'https://your-api.netlify.app/.netlify/functions/analytics';
+        // 
+        // SECURITY NOTE:
+        //   - Never expose API keys or authentication tokens in client-side code
+        //   - Use environment variables in your backend/serverless function
+        //   - Implement rate limiting and CORS properly on your backend
+        // 
+        // CURRENT STATUS: Disabled (no endpoint configured)
+        // ============================================
         const GA_STATS_ENDPOINT = '';
         
         async function updateMonthly() {
             if (!GA_STATS_ENDPOINT) {
                 // Feature disabled - no endpoint configured
+                // To enable: set GA_STATS_ENDPOINT to your analytics API endpoint URL
                 return;
             }
             
             try {
-                const res = await fetch(GA_STATS_ENDPOINT, { cache: 'no-store' });
-                if (!res.ok) return;
+                const res = await fetch(GA_STATS_ENDPOINT, { 
+                    cache: 'no-store',
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+                if (!res.ok) {
+                    console.warn('Analytics API request failed:', res.status, res.statusText);
+                    return;
+                }
                 
                 const data = await res.json();
                 const totalUsers = data.totalUsers ?? null;
@@ -1228,7 +1553,590 @@
             hoursElement.textContent = totalHours;
         }
     }
+
+    // ============================================
+    // Project Views Counter (КРИТИЧЕСКОЕ ИСПРАВЛЕНИЕ)
+    // ============================================
     
+    // Единый ключ для хранения счетчиков просмотров в localStorage
+    // КРИТИЧНО: Используется ОДИНАКОВЫЙ ключ для ВСЕХ тем - это гарантирует единый подсчет
+    // НЕ создавать отдельные ключи для светлой/темной темы!
+    const PROJECT_VIEWS_KEY = 'portfolio_project_views';
+    
+    /**
+     * Нормализовать и очистить данные просмотров в localStorage
+     * КРИТИЧНО: JSON.stringify всегда конвертирует ключи в строки, поэтому используем строковые ключи
+     * Нормализует все ключи в строковый формат для гарантии единого подсчета для всех тем
+     */
+    function normalizeProjectViewsData() {
+        try {
+            // Нормализуем данные просмотров
+            const views = localStorage.getItem(PROJECT_VIEWS_KEY);
+            if (views) {
+                try {
+                    const viewsObj = JSON.parse(views);
+                    const normalizedViews = {};
+                    
+                    // Проходим по всем ключам и нормализуем их
+                    // КРИТИЧНО: JSON всегда использует строковые ключи, поэтому нормализуем к строкам
+                    for (const key in viewsObj) {
+                        if (viewsObj.hasOwnProperty(key)) {
+                            const numKey = parseInt(key, 10);
+                            if (!isNaN(numKey) && numKey > 0) {
+                                // Используем строковый ключ (так как JSON всегда строки)
+                                const keyStr = String(numKey);
+                                const value = viewsObj[key];
+                                
+                                // Нормализуем значение - должно быть числом >= 0
+                                if (typeof value === 'number' && value >= 0) {
+                                    normalizedViews[keyStr] = value;
+                                } else if (typeof value === 'string') {
+                                    const parsedValue = parseInt(value, 10);
+                                    if (!isNaN(parsedValue) && parsedValue >= 0) {
+                                        normalizedViews[keyStr] = parsedValue;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    // Сохраняем нормализованные данные (все ключи - строки)
+                    localStorage.setItem(PROJECT_VIEWS_KEY, JSON.stringify(normalizedViews));
+                } catch (e) {
+                    console.warn('Error normalizing views data, resetting:', e);
+                    localStorage.setItem(PROJECT_VIEWS_KEY, JSON.stringify({}));
+                }
+            } else {
+                // Если данных нет, инициализируем пустой объект
+                localStorage.setItem(PROJECT_VIEWS_KEY, JSON.stringify({}));
+            }
+        } catch (e) {
+            console.error('Error normalizing project views data:', e);
+        }
+    }
+    
+    /**
+     * Инициализация счетчика просмотров (вызывается один раз при загрузке)
+     * КРИТИЧНО: Использует единый ключ localStorage для всех тем, гарантирует единый подсчет
+     * Счетчик увеличивается при каждом открытии модального окна (все просмотры учитываются)
+     */
+    function initProjectViews() {
+        try {
+            // КРИТИЧНО: Нормализуем данные ПЕРЕД инициализацией
+            // Это удаляет дублирующиеся ключи и гарантирует единый подсчет для всех тем
+            normalizeProjectViewsData();
+            
+            // Инициализируем объект просмотров в localStorage, если его нет
+            if (!localStorage.getItem(PROJECT_VIEWS_KEY)) {
+                localStorage.setItem(PROJECT_VIEWS_KEY, JSON.stringify({}));
+            }
+            
+            // КРИТИЧНО: Слушатель событий storage для синхронизации между вкладками
+            // Это гарантирует, что при изменении данных в другой вкладке счетчики обновляются
+            // НО: событие storage НЕ срабатывает в той же вкладке, где произошло изменение
+            // Поэтому мы также вызываем updateProjectViewsInCards() после каждого изменения
+            window.addEventListener('storage', (e) => {
+                if (e.key === PROJECT_VIEWS_KEY) {
+                    // Нормализуем данные при изменении из другой вкладки
+                    normalizeProjectViewsData();
+                    // Обновляем счетчики в карточках
+                    updateProjectViewsInCards();
+                }
+            });
+            
+            // КРИТИЧНО: Обновляем счетчики при возврате фокуса на страницу
+            // Это гарантирует синхронизацию, если данные были изменены в другой вкладке
+            window.addEventListener('focus', () => {
+                normalizeProjectViewsData();
+                updateProjectViewsInCards();
+            });
+            
+            // Обновляем счетчики в карточках при инициализации
+            // Используем setTimeout для гарантии, что DOM полностью загружен
+            // Это важно, так как проекты могут быть отрендерены после инициализации
+            setTimeout(() => {
+                updateProjectViewsInCards();
+            }, 100);
+        } catch (e) {
+            console.error('Error initializing project views:', e);
+        }
+    }
+    
+    /**
+     * Получить количество просмотров проекта
+     * КРИТИЧНО: JSON всегда использует строковые ключи, поэтому используем строковый ключ для доступа
+     * Это гарантирует единый подсчет для всех тем
+     * @param {number} projectId - ID проекта
+     * @returns {number} Количество просмотров
+     */
+    function getProjectViews(projectId) {
+        try {
+            // Нормализуем projectId (всегда число, но для ключа используем строку)
+            projectId = parseInt(projectId, 10);
+            if (isNaN(projectId) || projectId <= 0) {
+                return 0;
+            }
+            
+            // Получаем данные из localStorage (единственный источник истины, работает одинаково для всех тем)
+            const views = localStorage.getItem(PROJECT_VIEWS_KEY);
+            if (!views) {
+                return 0;
+            }
+            
+            let viewsObj = {};
+            try {
+                viewsObj = JSON.parse(views);
+            } catch (e) {
+                console.warn('Error parsing views from localStorage:', e);
+                // Если данные повреждены, нормализуем их
+                normalizeProjectViewsData();
+                return 0;
+            }
+            
+            // КРИТИЧНО: JSON всегда использует строковые ключи, поэтому используем строковый ключ
+            // Это гарантирует единый подсчет для всех тем
+            const keyStr = String(projectId);
+            const count = viewsObj[keyStr];
+            
+            // Если значение не найдено, возвращаем 0
+            if (count === undefined || count === null) {
+                return 0;
+            }
+            
+            // Убеждаемся, что возвращаем число, а не строку
+            if (typeof count === 'number') {
+                return count >= 0 ? count : 0;
+            }
+            
+            // Пытаемся преобразовать строку в число (на случай, если данные не нормализованы)
+            const parsedCount = parseInt(count, 10);
+            if (!isNaN(parsedCount) && parsedCount >= 0) {
+                // Если получилось преобразовать, нормализуем данные для будущего
+                try {
+                    viewsObj[keyStr] = parsedCount;
+                    localStorage.setItem(PROJECT_VIEWS_KEY, JSON.stringify(viewsObj));
+                } catch (e) {
+                    console.warn('Error saving normalized views:', e);
+                }
+                return parsedCount;
+            }
+            
+            return 0;
+        } catch (e) {
+            console.warn('Error reading project views:', e);
+            return 0;
+        }
+    }
+    
+    /**
+     * Обновить счетчики просмотров во всех карточках проектов на странице
+     * КРИТИЧНО: Синхронизирует отображение счетчиков с данными из localStorage
+     * Вызывается после рендеринга проектов и после увеличения счетчика
+     * Гарантирует единое отображение для всех тем
+     */
+    function updateProjectViewsInCards() {
+        try {
+            // КРИТИЧНО: Нормализуем данные ПЕРЕД обновлением отображения (только один раз)
+            // Это гарантирует, что мы работаем с правильными данными
+            normalizeProjectViewsData();
+            
+            // Находим все элементы со счетчиками просмотров
+            const viewsSpans = document.querySelectorAll('[data-views-count]');
+            
+            if (viewsSpans.length === 0) {
+                // Если элементов нет, это нормально (например, при первой загрузке или когда проекты не отображены)
+                return;
+            }
+            
+            // КРИТИЧНО: Получаем данные из localStorage один раз для всех элементов
+            // Это гарантирует единый источник истины и предотвращает рассинхронизацию
+            const views = localStorage.getItem(PROJECT_VIEWS_KEY);
+            let viewsObj = {};
+            if (views) {
+                try {
+                    viewsObj = JSON.parse(views);
+                } catch (e) {
+                    console.warn('Error parsing views in updateProjectViewsInCards:', e);
+                    return;
+                }
+            }
+            
+            // Обновляем каждый элемент используя одни и те же данные
+            viewsSpans.forEach(span => {
+                try {
+                    const projectIdStr = span.getAttribute('data-views-count');
+                    if (!projectIdStr) {
+                        return;
+                    }
+                    
+                    const projectId = parseInt(projectIdStr, 10);
+                    if (isNaN(projectId) || projectId <= 0) {
+                        return;
+                    }
+                    
+                    // КРИТИЧНО: Используем строковый ключ (так как JSON всегда строки)
+                    // Это гарантирует единый подсчет для всех тем
+                    const keyStr = String(projectId);
+                    const count = viewsObj[keyStr];
+                    
+                    // Получаем значение (число или 0)
+                    const views = (count !== undefined && count !== null) ? 
+                        (typeof count === 'number' ? count : parseInt(count, 10) || 0) : 0;
+                    
+                    // Обновляем текст счетчика ВСЕГДА (для гарантии синхронизации)
+                    // Это важно, так как данные могли измениться из другого контекста (тема, вкладка и т.д.)
+                    const newText = String(views);
+                    span.textContent = newText;
+                } catch (e) {
+                    // Игнорируем ошибки для отдельных элементов, продолжаем обработку остальных
+                    console.warn('Error updating view count for span:', e);
+                }
+            });
+        } catch (e) {
+            console.warn('Error updating project views in cards:', e);
+            // В случае ошибки пытаемся нормализовать данные
+            try {
+                normalizeProjectViewsData();
+            } catch (normalizeError) {
+                console.error('Error normalizing data in updateProjectViewsInCards:', normalizeError);
+            }
+        }
+    }
+    
+    /**
+     * Увеличить счетчик просмотров проекта
+     * КРИТИЧНО: Использует единый ключ localStorage для всех тем, считает ВСЕ просмотры (не уникальные)
+     * Каждое открытие модального окна увеличивает счетчик на 1
+     * @param {number} projectId - ID проекта
+     */
+    function incrementProjectViews(projectId) {
+        try {
+            // Нормализуем projectId (всегда число)
+            projectId = parseInt(projectId, 10);
+            if (isNaN(projectId) || projectId <= 0) {
+                console.warn('Invalid projectId in incrementProjectViews:', projectId);
+                return;
+            }
+            
+            // КРИТИЧНО: Нормализуем данные ПЕРЕД увеличением счетчика
+            // Это гарантирует, что мы работаем с правильными данными
+            normalizeProjectViewsData();
+            
+            // Получаем текущее количество просмотров из localStorage
+            const currentCount = getProjectViews(projectId);
+            
+            // Увеличиваем счетчик на 1 (каждый просмотр считается)
+            const newCount = currentCount + 1;
+            
+            // Сохраняем обновленное количество просмотров в localStorage
+            // Получаем текущие данные из localStorage (единственный источник истины)
+            const views = localStorage.getItem(PROJECT_VIEWS_KEY);
+            let viewsObj = {};
+            if (views) {
+                try {
+                    viewsObj = JSON.parse(views);
+                } catch (e) {
+                    console.warn('Error parsing views from localStorage, resetting:', e);
+                    viewsObj = {};
+                }
+            }
+            
+            // КРИТИЧНО: JSON всегда использует строковые ключи, поэтому используем строковый ключ
+            // Это гарантирует единый подсчет для всех тем (светлая и темная используют один ключ)
+            const keyStr = String(projectId);
+            viewsObj[keyStr] = newCount;
+            
+            // Удаляем ВСЕ дублирующиеся ключи (если есть разные варианты записи)
+            // Это важно для предотвращения дублирования данных
+            for (const key in viewsObj) {
+                if (viewsObj.hasOwnProperty(key)) {
+                    // Если это другой вариант записи того же projectId, удаляем его
+                    if (key !== keyStr && parseInt(key, 10) === projectId) {
+                        delete viewsObj[key];
+                    }
+                }
+            }
+            
+            // Сохраняем в localStorage (работает одинаково для всех тем)
+            localStorage.setItem(PROJECT_VIEWS_KEY, JSON.stringify(viewsObj));
+            
+            // КРИТИЧНО: Нормализуем данные ПОСЛЕ сохранения
+            // Это гарантирует, что данные всегда в правильном формате
+            normalizeProjectViewsData();
+            
+            // Обновляем счетчик в карточках проектов на странице
+            // Используем requestAnimationFrame для гарантии, что DOM готов и обновлен
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    updateProjectViewsInCards();
+                }, 0);
+            });
+        } catch (e) {
+            console.error('Error incrementing project views:', e);
+            // В случае ошибки нормализуем данные и пытаемся обновить отображение
+            try {
+                normalizeProjectViewsData();
+                updateProjectViewsInCards();
+            } catch (updateError) {
+                console.error('Error updating project views in cards:', updateError);
+            }
+        }
+    }
+    
+    // ============================================
+    // Error Handling & Notifications
+    // ============================================
+    
+    /**
+     * Показать уведомление об ошибке пользователю
+     * @param {string} message - Сообщение об ошибке
+     * @param {string} type - Тип уведомления ('error', 'warning', 'info')
+     */
+    function showNotification(message, type = 'error') {
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.setAttribute('role', 'alert');
+        notification.setAttribute('aria-live', 'assertive');
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        
+        // Показать уведомление
+        setTimeout(() => notification.classList.add('show'), 10);
+        
+        // Скрыть и удалить через 5 секунд
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 300);
+        }, 5000);
+    }
+    
+    /**
+     * Валидация данных проекта
+     * @param {Object} project - Объект проекта
+     * @returns {Object} Результат валидации {valid: boolean, errors: string[]}
+     */
+    function validateProjectData(project) {
+        const errors = [];
+        const required = ['id', 'title', 'description', 'technologies', 'category', 'date'];
+        
+        // Проверка обязательных полей
+        required.forEach(field => {
+            if (!project.hasOwnProperty(field) || !project[field]) {
+                errors.push(`Отсутствует обязательное поле: ${field}`);
+            }
+        });
+        
+        // Проверка типов
+        if (project.id && typeof project.id !== 'number') {
+            errors.push('Поле id должно быть числом');
+        }
+        if (project.technologies && !Array.isArray(project.technologies)) {
+            errors.push('Поле technologies должно быть массивом');
+        }
+        if (project.date && !/^\d{4}-\d{2}-\d{2}$/.test(project.date)) {
+            errors.push('Поле date должно быть в формате YYYY-MM-DD');
+        }
+        
+        return {
+            valid: errors.length === 0,
+            errors: errors
+        };
+    }
+    
+    // ============================================
+    // Analytics Tracking
+    // ============================================
+    
+    /**
+     * Отслеживание событий для аналитики
+     * @param {string} category - Категория события
+     * @param {string} action - Действие
+     * @param {string} label - Метка события
+     */
+    function trackEvent(category, action, label) {
+        try {
+            // Google Analytics
+            if (window.gtag) {
+                gtag('event', action, {
+                    'event_category': category,
+                    'event_label': label
+                });
+            }
+            
+            // Yandex Metrika
+            if (window.ym) {
+                ym('ea9e94e7d4dc4023b0b19cf40f44b574', 'reachGoal', `${category}_${action}`, {
+                    label: label
+                });
+            }
+        } catch (e) {
+            console.error('Analytics tracking error:', e);
+        }
+    }
+    
+    // ============================================
+    // Focus Trap for Modals
+    // ============================================
+    
+    /**
+     * Создать focus trap для модального окна
+     * @param {Element} modal - Элемент модального окна
+     */
+    let focusTrapCleanup = null;
+    
+    function trapFocus(modal) {
+        const focusableElements = modal.querySelectorAll(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusableElements.length === 0) return;
+        
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+        
+        function handleTabKey(e) {
+            if (e.key !== 'Tab') return;
+            
+            if (e.shiftKey) {
+                if (document.activeElement === firstElement) {
+                    e.preventDefault();
+                    lastElement.focus();
+                }
+            } else {
+                if (document.activeElement === lastElement) {
+                    e.preventDefault();
+                    firstElement.focus();
+                }
+            }
+        }
+        
+        modal.addEventListener('keydown', handleTabKey);
+        
+        // Сохраняем функцию для удаления обработчика
+        focusTrapCleanup = () => {
+            modal.removeEventListener('keydown', handleTabKey);
+            focusTrapCleanup = null;
+        };
+    }
+    
+    /**
+     * Удалить focus trap
+     */
+    function removeFocusTrap() {
+        if (focusTrapCleanup) {
+            focusTrapCleanup();
+        }
+    }
+    
+    // ============================================
+    // Scroll to Top Button
+    // ============================================
+    
+    /**
+     * Инициализация кнопки "Наверх"
+     */
+    function initScrollToTop() {
+        // Проверяем, не создана ли кнопка уже
+        let scrollBtn = document.getElementById('scroll-to-top');
+        if (scrollBtn) {
+            // Кнопка уже существует, просто обновим обработчики
+            scrollBtn = scrollBtn;
+        } else {
+            // Создаем кнопку
+            scrollBtn = document.createElement('button');
+            scrollBtn.id = 'scroll-to-top';
+            scrollBtn.className = 'scroll-to-top-btn';
+            scrollBtn.setAttribute('aria-label', 'Прокрутить наверх');
+            scrollBtn.setAttribute('title', 'Наверх');
+            scrollBtn.innerHTML = '<i class="fas fa-arrow-up" aria-hidden="true"></i>';
+            document.body.appendChild(scrollBtn);
+        }
+        
+        // Показывать/скрывать кнопку при прокрутке
+        function toggleScrollButton() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+            if (scrollTop > 300) {
+                scrollBtn.classList.add('visible');
+            } else {
+                scrollBtn.classList.remove('visible');
+            }
+        }
+        
+        // Удаляем старые обработчики, если они есть (предотвращаем дублирование)
+        const oldScrollHandler = scrollBtn._scrollHandler;
+        if (oldScrollHandler) {
+            window.removeEventListener('scroll', oldScrollHandler);
+        }
+        
+        // Сохраняем ссылку на обработчик для возможного удаления
+        scrollBtn._scrollHandler = debounce(toggleScrollButton, 100);
+        
+        // Проверяем начальное состояние сразу
+        toggleScrollButton();
+        
+        // Прокрутка наверх (удаляем старые обработчики, если есть)
+        scrollBtn.onclick = null;
+        scrollBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            trackEvent('UI', 'scroll_to_top', 'button_click');
+        });
+        
+        // Обработка прокрутки
+        window.addEventListener('scroll', scrollBtn._scrollHandler, { passive: true });
+        
+        // Также проверяем при загрузке и после загрузки
+        if (document.readyState === 'complete') {
+            toggleScrollButton();
+        } else {
+            window.addEventListener('load', toggleScrollButton, { once: true });
+        }
+        
+        // Проверяем при изменении размера окна
+        window.addEventListener('resize', debounce(toggleScrollButton, 100), { passive: true });
+        
+        // Keyboard navigation
+        scrollBtn.onkeydown = null;
+        scrollBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                scrollBtn.click();
+            }
+        });
+    }
+    
+    // ============================================
+    // Loading Indicator
+    // ============================================
+    
+    /**
+     * Показать индикатор загрузки
+     */
+    function showLoadingIndicator() {
+        let indicator = document.getElementById('loading-indicator');
+        if (!indicator) {
+            indicator = document.createElement('div');
+            indicator.id = 'loading-indicator';
+            indicator.className = 'loading-indicator';
+            indicator.setAttribute('aria-live', 'polite');
+            indicator.setAttribute('aria-label', 'Загрузка проектов');
+            indicator.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Загрузка...</span>';
+            document.getElementById('projects').appendChild(indicator);
+        }
+        indicator.style.display = 'flex';
+    }
+    
+    /**
+     * Скрыть индикатор загрузки
+     */
+    function hideLoadingIndicator() {
+        const indicator = document.getElementById('loading-indicator');
+        if (indicator) {
+            indicator.style.display = 'none';
+        }
+    }
+
     // ============================================
     // Initialize Everything
     // ============================================
@@ -1248,6 +2156,20 @@
         // Initialize projects filter
         const filter = new ProjectsFilter();
         filter.init();
+        
+        // Initialize project views counter
+        initProjectViews();
+        
+        // Validate projects data
+        projectsData.forEach((project, index) => {
+            const validation = validateProjectData(project);
+            if (!validation.valid) {
+                console.warn(`Project ${index + 1} (ID: ${project.id}) validation errors:`, validation.errors);
+            }
+        });
+        
+        // Initialize scroll to top button
+        initScrollToTop();
         
         // Calculate and display total hours
         updateTotalHours();

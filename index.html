@@ -34,7 +34,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta name="theme-color" content="#F00">
+    <meta name="theme-color" content="#2c3e50">
     <meta name="format-detection" content="telephone=no">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -98,7 +98,16 @@
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+    
+    <!-- Preload критичных ресурсов -->
+    <link rel="preload" href="css/main.css" as="style">
+    <link rel="preload" href="js/config.js" as="script">
+    <link rel="preload" href="js/main.js" as="script">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    
+    <!-- Асинхронная загрузка Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous"></noscript>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -151,6 +160,70 @@
             {"@type": "ListItem", "position": 9, "item": {"@type": "CreativeWork", "name": "Analyze data in Jupyter Notebook in Python", "url": "https://raw.githubusercontent.com/karamin-stanislav/Tasks-Solutions-Data-Analysis/main/20250915%20%D0%9B%D0%912.%20%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B%20%D0%B0%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85%20%D0%B2%20Python.%20%D0%A0%D0%95%D0%A8%D0%95%D0%9D%D0%98%D0%95.%20%D0%A1.%20%D0%9F.%20%D0%9A%D0%B0%D1%80%D0%B0%D0%BC%D0%B8%D0%BD.%2007.10.2025.ipynb", "image": "https://raw.githubusercontent.com/KSP-Hub/Tasks-Solutions-Data-Analysis/refs/heads/main/20250915%20ЛБ2.%20Основы%20анализа%20данных%20в%20Python.%20РЕШЕНИЕ.%20С.%20П.%20Карамин.%2007.10.2025_page-0001_1_5sek---.gif", "datePublished": "2025-09-15"}},
             {"@type": "ListItem", "position": 10, "item": {"@type": "CreativeWork", "name": "Data collection, processing, and structuring in Jupyter Notebook in Python", "url": "https://raw.githubusercontent.com/karamin-stanislav/Tasks-Solutions-Data-Analysis/main/20250909%20%D0%9B%D0%90%D0%911.%20%D0%A1%D0%B1%D0%BE%D1%80%2C%20%D0%BE%D0%B1%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0%20%D0%B8%20%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85%20%D0%A1.%20%D0%9F.%20%D0%9A%D0%B0%D1%80%D0%B0%D0%BC%D0%B8%D0%BD%202025%20%D0%A0%D0%95%D0%A8%D0%95%D0%9D%D0%98%D0%95.ipynb", "image": "https://raw.githubusercontent.com/KSP-Hub/Tasks-Solutions-Data-Analysis/refs/heads/main/20250909%20ЛБ1.%20Сбор%2C%20обработка%20и%20структурирование%20данных%20С.%20П.%20Карамин%202025%20РЕШЕНИЕ_page_all_1_5sek---.gif", "datePublished": "2025-09-09"}}
           ]
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Главная",
+              "item": "https://ksp-hub.github.io/Stanislav-Karamin-Portfolio/"
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Какие технологии использует Станислав Карамин?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Станислав Карамин специализируется на Python, SQL, Business Intelligence (BI), статистике и визуализации данных. В портфолио представлены проекты с использованием Python, SQL, PostgreSQL, ClickHouse, DataLens, Excel, и различных библиотек для анализа данных."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Как связаться со Станиславом Караминым?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Вы можете связаться со Станиславом Караминым по электронной почте: karamin.stanislav@gmail.com, через LinkedIn, Telegram (@karamin_ru) или GitHub (KSP-Hub). Также доступно резюме на HeadHunter."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Какой опыт работы у Станислава Карамина?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Станислав Карамин - программист-аналитик (Programmer Analyst) с опытом работы в области анализа данных, Python, SQL, BI и статистики. В портфолио представлены проекты по анализу данных, визуализации, работе с базами данных и созданию аналитических отчетов."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Где можно посмотреть проекты Станислава Карамина?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Все проекты доступны в разделе 'МОИ ПРОЕКТЫ' на этом портфолио. Проекты включают аналитические отчеты, визуализации данных, SQL-запросы, Python-скрипты и дашборды. Многие проекты доступны на GitHub и в DataLens."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Над чем сейчас работает Станислав Карамин?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "В настоящее время Станислав Карамин развивается в сфере компьютерного зрения (CV), изучает C++ для реализации высокопроизводительных CV-алгоритмов, усиливает математическую базу для понимания и разработки моделей CV. Открыт к стажировкам в командах по компьютерному зрению и участию в open-source-проектах по CV."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Какое оборудование использует Станислав Карамин?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Workstation: Dell Precision 7920 Tower с Windows 10 Pro, Linux notebook, MacBook. Подробная информация об оборудовании доступна в разделе 'ТЕКУЩИЙ ФОКУС' и в файле Hardware.md."
+              }
+            }
+          ]
         }
       ]
     }
@@ -182,12 +255,10 @@ body {
 }
 
 header {
-  background-color: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   color: white;
-  padding: 1rem 0;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  padding: 3rem 0;
+  margin-bottom: 3rem;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
@@ -218,6 +289,8 @@ header {
 <!-- Основной CSS файл -->
 <link rel="stylesheet" href="css/main.css" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="css/main.css"></noscript>
+<!-- Компонентные стили -->
+<link rel="stylesheet" href="css/components.css">
 
 </head>
 <body>
@@ -225,12 +298,22 @@ header {
     <noscript>
         <div><img src="https://mc.yandex.ru/watch/ea9e94e7d4dc4023b0b19cf40f44b574" style="position:absolute; left:-9999px;" alt=""/></div>
     </noscript>
+    
+    <!-- Skip to content link для доступности -->
+    <a href="#main-content" class="skip-link">Перейти к основному контенту</a>
 
     <header>
         <div class="container">
             <div class="profile-header">
-                <img src="https://raw.githubusercontent.com/KSP-Hub/assets/c9a08d816996bafee8e1acbb36ade5d8bd90bbb5/image/KSP-Profile-Photo3B.webp" alt="Stanislav Karamin - Programmer Analyst" class="profile-photo" width="160" height="160" fetchpriority="high" loading="eager" decoding="async">
-                <div>
+                <img src="https://raw.githubusercontent.com/KSP-Hub/assets/c9a08d816996bafee8e1acbb36ade5d8bd90bbb5/image/KSP-Profile-Photo3B.webp" 
+                     alt="Stanislav Karamin - Programmer Analyst" 
+                     class="profile-photo" 
+                     width="200" 
+                     height="200" 
+                     fetchpriority="high" 
+                     loading="eager" 
+                     decoding="async">
+                <div class="profile-text">
                     <h1>Станислав Карамин</h1>
                     <div class="tagline">Программист-аналитик, CV-инженер, Стажер</div>
                     <div class="profile-badges-container">
@@ -250,7 +333,7 @@ header {
     </header>
 
     <!-- Consent banner -->
-    <div id="consent-banner" class="consent-banner" role="dialog" aria-live="polite" aria-label="Analytics consent" aria-hidden="true" style="display:none;">
+    <div id="consent-banner" class="consent-banner" role="dialog" aria-live="polite" aria-label="Analytics consent" aria-hidden="true">
         <div class="consent-inner">
             <div>
                 I use Yandex.Metrica and Google Analytics to analyze the usage of my website (my portfolio).
@@ -262,7 +345,7 @@ header {
         </div>
     </div>
 
-    <main class="container">
+    <main id="main-content" class="container">
         <!-- ===== ABOUT ME SECTION ===== -->
         <section id="about" class="reveal" aria-labelledby="about-heading">
             <h2 id="about-heading"><i class="fas fa-user" aria-hidden="true"></i> ОБО МНЕ</h2>
@@ -276,11 +359,11 @@ header {
                     
                     <div class="competencies-box">
                         <strong>Базовые компетенции (по результатам обучения в РАНХиГС):</strong>
-                        <ul style="margin-top: 0.8rem; line-height: 1.8;">
-                            <li style="margin-bottom: 0.6rem;"><strong>Data Processing:</strong> сбор, структурирование, анализ данных;</li>
-                            <li style="margin-bottom: 0.6rem;"><strong>Python Development:</strong> pandas (обработка данных), matplotlib/seaborn (визуализация);</li>
-                            <li style="margin-bottom: 0.6rem;"><strong>Business Intelligence:</strong> отчёты и дашборды (Excel, DataLens);</li>
-                            <li style="margin-bottom: 0;"><strong>Database Management:</strong> SQL‑запросы в PostgreSQL.</li>
+                        <ul>
+                            <li><strong>Data Processing:</strong> сбор, структурирование, анализ данных;</li>
+                            <li><strong>Python Development:</strong> pandas (обработка данных), matplotlib/seaborn (визуализация);</li>
+                            <li><strong>Business Intelligence:</strong> отчёты и дашборды (Excel, DataLens);</li>
+                            <li><strong>Database Management:</strong> SQL‑запросы в PostgreSQL.</li>
                         </ul>
                     </div>
                 </div>
@@ -416,19 +499,19 @@ header {
                 <div class="filter-group">
                     <h3><i class="fas fa-folder" aria-hidden="true"></i> Категория</h3>
                     <div class="tech-tags" role="group" aria-label="Filter projects by category">
-                        <div class="tech-tag active" data-category="all" role="button" tabindex="0" aria-pressed="true" aria-label="Show all projects">Все проекты</div>
-                        <div class="tech-tag" data-category="data-analysis" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by data analysis projects">Анализ данных</div>
-                        <div class="tech-tag" data-category="visualization" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by visualization projects">Визуализация</div>
-                        <div class="tech-tag" data-category="web" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by web development projects">Веб-разработка</div>
-                        <div class="tech-tag" data-category="computer-vision" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by computer vision projects">Компьютерное зрение</div>
-                        <div class="tech-tag" data-category="deep-learning" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by deep learning projects">Глубокое обучение</div>
+                        <div class="tech-tag active" data-category="all" role="button" tabindex="0" aria-pressed="true" aria-label="Фильтр: показать все проекты">Все проекты</div>
+                        <div class="tech-tag" data-category="data-analysis" role="button" tabindex="0" aria-pressed="false" aria-label="Фильтр: показать проекты по анализу данных">Анализ данных</div>
+                        <div class="tech-tag" data-category="visualization" role="button" tabindex="0" aria-pressed="false" aria-label="Фильтр: показать проекты по визуализации данных">Визуализация</div>
+                        <div class="tech-tag" data-category="web" role="button" tabindex="0" aria-pressed="false" aria-label="Фильтр: показать проекты по веб-разработке">Веб-разработка</div>
+                        <div class="tech-tag" data-category="computer-vision" role="button" tabindex="0" aria-pressed="false" aria-label="Фильтр: показать проекты по компьютерному зрению">Компьютерное зрение</div>
+                        <div class="tech-tag" data-category="deep-learning" role="button" tabindex="0" aria-pressed="false" aria-label="Фильтр: показать проекты по глубокому обучению">Глубокое обучение</div>
                     </div>
                 </div>
                 
                 <div class="filter-group">
                     <h3><i class="fas fa-code" aria-hidden="true"></i> Набор технологий</h3>
                     <div class="tech-tags" id="tech-filters" role="group" aria-label="Filter projects by technology">
-                        <div class="tech-tag active" data-tech="all" role="button" tabindex="0" aria-pressed="true" aria-label="Show all technologies">Все технологии</div>
+                        <div class="tech-tag active" data-tech="all" role="button" tabindex="0" aria-pressed="true" aria-label="Фильтр: показать проекты со всеми технологиями">Все технологии</div>
                         <!-- Технологии будут добавлены через JavaScript -->
                     </div>
                 </div>
@@ -436,10 +519,10 @@ header {
                 <div class="filter-group">
                     <h3><i class="fas fa-tasks" aria-hidden="true"></i> Статус проекта</h3>
                     <div class="tech-tags" role="group" aria-label="Filter projects by status">
-                        <div class="tech-tag active" data-status="all" role="button" tabindex="0" aria-pressed="true" aria-label="Show all statuses">Все статусы</div>
-                        <div class="tech-tag" data-status="backlog" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by backlog projects">Backlog</div>
-                        <div class="tech-tag" data-status="doing" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by doing projects">Doing</div>
-                        <div class="tech-tag" data-status="done" role="button" tabindex="0" aria-pressed="false" aria-label="Filter by done projects">Done</div>
+                        <div class="tech-tag active" data-status="all" role="button" tabindex="0" aria-pressed="true" aria-label="Фильтр: показать проекты со всеми статусами">Все статусы</div>
+                        <div class="tech-tag" data-status="backlog" role="button" tabindex="0" aria-pressed="false" aria-label="Фильтр: показать проекты со статусом Backlog (запланированные)">Backlog</div>
+                        <div class="tech-tag" data-status="ongoing" role="button" tabindex="0" aria-pressed="false" aria-label="Фильтр: показать проекты со статусом Ongoing (в работе)">Ongoing</div>
+                        <div class="tech-tag" data-status="done" role="button" tabindex="0" aria-pressed="false" aria-label="Фильтр: показать проекты со статусом Done (завершенные)">Done</div>
                     </div>
                 </div>
             </div>
@@ -548,7 +631,7 @@ header {
 
             <div class="equipment-section">
                 <h3><i class="fas fa-desktop" aria-hidden="true"></i> Оборудование</h3>
-                <p><strong>Workstation:</strong> Dell Precision 7920 Tower, Windows 10 Pro. Linux notebook. Macbook. <a href="">[hardware.md]</a></p>
+                <p>Workstation Dell Precision 7920 Tower, Windows 10 Pro  |  Linux notebook  |  Macbook  |  🔗 <a href="https://raw.githubusercontent.com/KSP-Hub/Stanislav-Karamin-Portfolio/refs/heads/main/Hardware.md" target="_blank" rel="noopener noreferrer" class="hardware-link">Hardware.md</a></p>
             </div>
         </section>
     </main>
@@ -583,12 +666,12 @@ header {
                             <p id="project-modal-tasks"></p>
                         </div>
                         
-                        <div class="detail-section" id="project-modal-features-section" style="display: none;">
+                        <div class="detail-section modal-section-hidden" id="project-modal-features-section">
                             <h4><i class="fas fa-star"></i> Ключевые особенности</h4>
                             <ul class="features-list" id="project-modal-features"></ul>
                         </div>
                         
-                        <div class="detail-section" id="project-modal-results-section" style="display: none;">
+                        <div class="detail-section modal-section-hidden" id="project-modal-results-section">
                             <h4><i class="fas fa-trophy"></i> Достигнутые результаты</h4>
                             <ul class="results-list" id="project-modal-results"></ul>
                         </div>
@@ -606,7 +689,7 @@ header {
                             <p><strong>Человеко-часы:</strong> <span id="project-modal-hours"></span></p>
                         </div>
                         
-                        <div class="detail-section" id="project-modal-metrics-section" style="display: none;">
+                        <div class="detail-section modal-section-hidden" id="project-modal-metrics-section">
                             <h4><i class="fas fa-chart-line"></i> Метрики успеха</h4>
                             <p id="project-modal-metrics"></p>
                         </div>
@@ -673,7 +756,24 @@ header {
     </footer>
 
     <!-- Main JavaScript -->
+    <script src="js/config.js"></script>
+    <script src="js/error-tracking.js"></script>
     <script src="js/main.js" defer></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then((registration) => {
+                    console.log('Service Worker registered:', registration);
+                })
+                .catch((error) => {
+                    console.error('Service Worker registration failed:', error);
+                });
+        });
+    }
+    </script>
 </body>
 </html>
 

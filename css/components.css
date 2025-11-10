@@ -1,0 +1,625 @@
+/* Компонентные стили для улучшенного дизайна */
+
+/* About Section */
+.about-section {
+    margin-top: 1.5rem;
+}
+
+.about-content {
+    width: 100%;
+}
+
+/* Profile Header Improvements */
+header .profile-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+header .profile-header {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: left;
+}
+
+header .profile-photo {
+    width: 200px !important;
+    height: 200px !important;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+header .profile-photo:hover {
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-header {
+        text-align: center;
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .profile-photo {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+/* Educational Vector Section - Less Vibrant Styles */
+/* Синий цвет с низкой прозрачностью (не яркий, но заметный) */
+.education-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--secondary-color);
+    border-radius: 12px 12px 0 0;
+    opacity: 0.35; /* Низкая прозрачность для менее яркого вида */
+}
+
+/* Альтернативный вариант: только тень без цвета (минималистично) */
+/* .education-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: transparent;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+} */
+
+.education-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Более мягкая тень */
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.education-card:hover {
+    transform: translateY(-3px); /* Меньше движения при hover */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12); /* Менее яркая тень при hover */
+}
+
+.education-card-title {
+    font-size: 1.2rem; /* Немного меньше */
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 600;
+}
+
+.education-card-title i {
+    font-size: 1.3rem; /* Немного меньше */
+    color: var(--secondary-color);
+    opacity: 0.8; /* Менее яркий */
+}
+
+.education-card-list li {
+    padding: 0.6rem 0 0.6rem 1.5rem;
+    position: relative;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+    line-height: 1.5;
+}
+
+.education-card-list li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: var(--secondary-color);
+    font-weight: 700;
+    font-size: 1rem;
+    opacity: 0.7; /* Менее яркий */
+}
+
+/* Dark Theme Support */
+@media (prefers-color-scheme: dark) {
+    .education-card::before {
+        background: var(--secondary-color);
+        opacity: 0.3; /* Еще менее яркий в темной теме */
+    }
+    
+    .education-card-title i {
+        opacity: 0.7;
+    }
+    
+    .education-card-list li::before {
+        opacity: 0.6;
+    }
+}
+
+/* Project Card Compact - базовые стили */
+.project-card-compact {
+    position: relative !important;
+    /* Убираем overflow: hidden из базовых стилей - он обрезает теги даже при 100% масштабе */
+    /* overflow применяется только к элементам, которые действительно должны быть обрезаны (например, заголовки с line-clamp) */
+}
+
+/* Обновление CSS классов для статуса "ongoing" (заменяет старый "doing" и "in progress") */
+.project-card-compact.status-ongoing::before {
+    background: #E6D690 !important;
+}
+
+.project-status-mini.status-ongoing {
+    border-color: #E6D690 !important;
+    color: #333 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    .project-status-mini.status-ongoing {
+        border-color: #E6D690 !important;
+        color: #e5e7eb !important;
+        background-color: rgba(230, 214, 144, 0.15) !important;
+    }
+}
+
+/* Выравнивание элементов в project-meta-mini (дата, ID, счётчик, подсказка) */
+.project-card-compact .project-meta-mini {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important; /* Выравнивание всех элементов по центру вертикально */
+    gap: 0.75rem !important; /* Равномерные отступы между элементами */
+    margin-top: auto !important;
+    padding-top: 0.25rem !important; /* Уменьшенный отступ сверху для визуального разделения */
+    border-top: 1px solid var(--border-color) !important; /* Визуальное разделение */
+    flex-wrap: wrap !important; /* Разрешаем перенос на новую строку на маленьких экранах */
+}
+
+/* Дата проекта - слева */
+.project-card-compact .project-date-mini {
+    font-size: 0.75rem !important;
+    color: #666 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.4 !important;
+    flex-shrink: 0 !important; /* Не сжимается */
+    white-space: nowrap !important; /* Не переносится */
+}
+
+/* Группа ID проекта и счётчика просмотров - в центре */
+.project-id-views-group {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important; /* Отступ между ID и счётчиком */
+    flex-shrink: 0 !important; /* Не сжимается */
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Project ID Badge - расположен в project-meta-mini перед счётчиком просмотров */
+.project-meta-mini .project-id-badge {
+    position: static !important; /* Обычное позиционирование в потоке */
+    font-size: 0.7rem !important;
+    color: var(--text-color) !important;
+    opacity: 0.6 !important;
+    font-weight: 400 !important;
+    background: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    line-height: 1.4 !important; /* Выравнивание по базовой линии с другими элементами */
+    display: inline-block !important;
+    white-space: nowrap !important; /* Не переносится */
+    vertical-align: middle !important; /* Выравнивание по центру */
+}
+
+/* Счётчик просмотров - в центре, рядом с ID */
+.project-card-compact .project-views-mini {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.25rem !important;
+    font-size: 0.7rem !important;
+    color: #999 !important;
+    opacity: 0.7 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.4 !important; /* Выравнивание по базовой линии с другими элементами */
+    white-space: nowrap !important; /* Не переносится */
+    vertical-align: middle !important; /* Выравнивание по центру */
+}
+
+.project-card-compact .project-views-mini i {
+    font-size: 0.65rem !important;
+    color: #999 !important;
+    opacity: 0.8 !important;
+    line-height: 1 !important;
+}
+
+.project-card-compact .project-views-mini span {
+    font-weight: 400 !important;
+    color: #999 !important;
+    line-height: 1.4 !important;
+}
+
+/* Подсказка "Click for details" - справа */
+.project-card-compact .click-hint {
+    font-size: 0.7rem !important;
+    opacity: 0.7 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.4 !important; /* Выравнивание по базовой линии с другими элементами */
+    flex-shrink: 0 !important; /* Не сжимается */
+    white-space: nowrap !important; /* Не переносится */
+    color: var(--secondary-color) !important;
+    vertical-align: middle !important; /* Выравнивание по центру */
+}
+
+/* Адаптация для маленьких экранов */
+@media (max-width: 768px) {
+    .project-card-compact .project-meta-mini {
+        flex-direction: column !important; /* Вертикальное расположение на мобильных */
+        align-items: flex-start !important; /* Выравнивание по левому краю */
+        gap: 0.5rem !important;
+        padding-top: 0.4rem !important; /* Уменьшенный отступ сверху на мобильных */
+    }
+    
+    .project-card-compact .project-date-mini {
+        font-size: 0.7rem !important;
+    }
+    
+    .project-card-compact .click-hint {
+        font-size: 0.65rem !important;
+        align-self: flex-end !important; /* Подсказка справа на новой строке */
+    }
+}
+
+/* Темная тема */
+@media (prefers-color-scheme: dark) {
+    .project-card-compact .project-meta-mini {
+        border-top-color: #334155 !important;
+    }
+    
+    .project-card-compact .project-date-mini {
+        color: #94a3b8 !important;
+    }
+    
+    .project-meta-mini .project-id-badge {
+        color: var(--text-color) !important;
+        opacity: 0.5 !important;
+    }
+    
+    .project-card-compact .project-views-mini {
+        color: #64748b !important;
+        opacity: 0.8 !important;
+    }
+    
+    .project-card-compact .project-views-mini i {
+        color: #64748b !important;
+        opacity: 0.9 !important;
+    }
+    
+    .project-card-compact .project-views-mini span {
+        color: #64748b !important;
+    }
+    
+    .project-card-compact .click-hint {
+        color: #6ab0ff !important;
+        opacity: 0.8 !important;
+    }
+}
+
+/* Project Status Badge - Adapt for "Ongoing" */
+.project-card-compact .project-status-mini {
+    font-size: 0.65rem !important; /* Немного уменьшаем шрифт для более длинного текста */
+    padding: 0.2rem 0.5rem !important; /* Компактный padding для "Ongoing" */
+    white-space: nowrap !important; /* Предотвращаем перенос текста */
+    min-width: fit-content !important; /* Минимальная ширина по содержимому */
+    max-width: 100% !important; /* Не выходит за границы */
+    flex-shrink: 0 !important; /* Не сжимается */
+    box-sizing: border-box !important; /* Padding включается в ширину */
+}
+
+/* Улучшенная структура header для корректного переноса заголовков при любом масштабе */
+.project-card-compact .project-header-mini {
+    position: relative !important;
+    min-height: 2.5rem !important; /* Минимальная высота для размещения статуса */
+    display: flex !important; /* Используем flexbox для лучшего контроля */
+    align-items: flex-start !important; /* Выравнивание по верху */
+    gap: 0.75rem !important; /* Отступ между заголовком и мета-информацией */
+    justify-content: space-between !important; /* Распределяем пространство */
+    margin-bottom: 0.6rem !important;
+    padding-top: 0 !important; /* Убрали отступ сверху, так как ID теперь в мета-информации */
+    z-index: 2 !important; /* Header должен быть выше тегов технологий */
+    background: transparent !important; /* Прозрачный фон, чтобы не перекрывать карточку */
+}
+
+.project-card-compact .project-title-mini {
+    flex: 1 1 auto !important; /* Занимает доступное пространство и может сжиматься */
+    min-width: 0 !important; /* Критично для переноса текста в flexbox */
+    padding-right: 0 !important; /* Убираем padding, используем gap в flexbox */
+    max-width: none !important; /* Убираем ограничение max-width для естественного переноса */
+    width: auto !important; /* Автоматическая ширина */
+    word-wrap: break-word !important; /* Перенос длинных слов по границам слов */
+    overflow-wrap: break-word !important; /* Перенос длинных слов */
+    word-break: normal !important; /* Нормальный перенос (не разрываем слова насильно) */
+    hyphens: auto !important; /* Автоматическая расстановка переносов */
+    line-height: 1.5 !important; /* Улучшенная высота строки для читаемости (для расчета max-height) */
+    margin: 0 !important; /* Убираем отступы по умолчанию */
+    box-sizing: border-box !important; /* Padding включается в ширину */
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    color: var(--primary-color) !important;
+    /* Ограничение заголовка до 2 строк для корректного отображения при масштабе 50%-35% */
+    /* Используем современный подход: ограничение через max-height и overflow с line-clamp */
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    /* Максимальная высота для 2 строк: line-height (1.5) * 2 строки = 3em */
+    max-height: 3em !important; /* Гарантирует отображение максимум 2 строк */
+}
+
+.project-card-compact .project-meta-header {
+    flex-shrink: 0 !important; /* Не сжимается */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    gap: 0.25rem !important;
+    position: static !important; /* Убираем absolute позиционирование для работы flexbox */
+    top: auto !important;
+    right: auto !important;
+}
+
+/* Адаптация для фильтров - статус "Ongoing" должен влезать */
+.tech-tag[data-status="ongoing"] {
+    white-space: nowrap;
+    min-width: fit-content;
+    padding: 0.25rem 0.6rem !important; /* Немного больше padding для читаемости */
+    border-color: #E6D690 !important;
+}
+
+/* Восстановление эффектов hover для фильтров статусов */
+.filter-group:last-child .tech-tag[data-status="ongoing"]:hover {
+    border-color: #E6D690 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(230, 214, 144, 0.4) !important;
+}
+
+.filter-group:last-child .tech-tag[data-status="backlog"]:hover {
+    border-color: #FFD1DC !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(255, 209, 220, 0.4) !important;
+}
+
+.filter-group:last-child .tech-tag[data-status="done"]:hover {
+    border-color: var(--border-color) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Адаптация для средних экранов */
+@media (max-width: 1000px) {
+    .project-card-compact .project-title-mini {
+        font-size: 0.93rem !important; /* Немного уменьшаем шрифт */
+        line-height: 1.4 !important; /* Улучшенная высота строки */
+        max-height: 2.8em !important; /* Адаптируем max-height: line-height (1.4) * 2 строки */
+    }
+    
+    .project-card-compact .project-status-mini {
+        font-size: 0.63rem !important; /* Немного уменьшаем статус */
+        padding: 0.18rem 0.5rem !important;
+    }
+    
+    .project-card-compact .project-header-mini {
+        gap: 0.6rem !important; /* Немного меньше отступ */
+    }
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+    .project-card-compact .project-header-mini {
+        gap: 0.5rem !important; /* Меньший отступ на мобильных */
+    }
+    
+    .project-card-compact .project-title-mini {
+        font-size: 0.9rem !important; /* Немного меньше размер шрифта */
+        line-height: 1.4 !important; /* Нормальная высота строки */
+        max-height: 2.8em !important; /* Адаптируем max-height: line-height (1.4) * 2 строки */
+    }
+    
+    .project-card-compact .project-status-mini {
+        font-size: 0.6rem !important; /* Еще меньше на мобильных */
+        padding: 0.15rem 0.45rem !important; /* Компактный padding для мобильных */
+    }
+    
+    .tech-tag[data-status="ongoing"] {
+        font-size: 0.65rem !important; /* Меньший шрифт для фильтров на мобильных */
+        padding: 0.2rem 0.5rem !important;
+    }
+}
+
+/* Адаптация для узких экранов */
+@media (max-width: 600px) {
+    .project-card-compact .project-title-mini {
+        font-size: 0.88rem !important;
+        line-height: 1.38 !important; /* Оптимальная высота строки */
+        max-height: 2.76em !important; /* Адаптируем max-height: line-height (1.38) * 2 строки */
+    }
+    
+    .project-card-compact .project-status-mini {
+        font-size: 0.58rem !important;
+        padding: 0.14rem 0.42rem !important;
+    }
+    
+    .project-card-compact .project-header-mini {
+        gap: 0.4rem !important; /* Еще меньше отступ на узких экранах */
+    }
+}
+
+/* Адаптация для очень маленьких экранов */
+@media (max-width: 480px) {
+    .project-card-compact .project-title-mini {
+        font-size: 0.85rem !important;
+        line-height: 1.45 !important; /* Немного больше высота строки для читаемости */
+        max-height: 2.9em !important; /* Адаптируем max-height: line-height (1.45) * 2 строки */
+    }
+    
+    .project-card-compact .project-status-mini {
+        font-size: 0.55rem !important; /* Минимальный размер шрифта */
+        padding: 0.12rem 0.4rem !important;
+    }
+    
+    .project-card-compact .project-header-mini {
+        gap: 0.35rem !important; /* Минимальный отступ */
+    }
+}
+
+/* Оптимизация отображения тегов технологий в карточках проектов */
+/* Предотвращает перекрытие тегов с элементами header при масштабе 50%-35% */
+.project-card-compact .project-tech-mini {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.3rem !important;
+    margin-bottom: 0.8rem !important;
+    /* При нормальном масштабе (100%) - без ограничений по высоте */
+    /* Ограничения применяются только через медиа-запросы для маленьких экранов/масштабов */
+    align-content: flex-start !important; /* Выравнивание по верхнему краю */
+    position: relative !important; /* Для корректного позиционирования */
+    z-index: 1 !important; /* Ниже header (z-index по умолчанию для header выше) */
+}
+
+/* Стили для отдельных тегов технологий */
+.project-card-compact .tech-badge-mini {
+    padding: 0.2rem 0.6rem !important;
+    background: var(--bg-color) !important;
+    border-radius: 10px !important;
+    font-size: 0.7rem !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-color) !important;
+    white-space: nowrap !important; /* Предотвращаем перенос текста внутри тега */
+    flex-shrink: 0 !important; /* Теги не сжимаются */
+    max-width: 100% !important; /* Не выходят за границы контейнера */
+    box-sizing: border-box !important;
+    line-height: 1.2 !important; /* Компактная высота строки */
+    /* Убираем overflow: hidden из базовых стилей - применяем только при необходимости через медиа-запросы */
+    text-overflow: ellipsis !important; /* Многоточие для длинных текстов (на случай очень длинных названий) */
+}
+
+/* Адаптация тегов технологий для маленьких экранов */
+/* Ограничения применяются только при необходимости */
+@media (max-width: 768px) {
+    .project-card-compact .project-tech-mini {
+        gap: 0.25rem !important;
+        margin-bottom: 0.7rem !important;
+    }
+    
+    .project-card-compact .tech-badge-mini {
+        font-size: 0.65rem !important;
+        padding: 0.15rem 0.5rem !important;
+        line-height: 1.15 !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .project-card-compact .project-tech-mini {
+        gap: 0.2rem !important;
+        margin-bottom: 0.6rem !important;
+    }
+    
+    .project-card-compact .tech-badge-mini {
+        font-size: 0.6rem !important;
+        padding: 0.12rem 0.45rem !important;
+        line-height: 1.1 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-card-compact .project-tech-mini {
+        gap: 0.18rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    .project-card-compact .tech-badge-mini {
+        font-size: 0.58rem !important;
+        padding: 0.1rem 0.4rem !important;
+        line-height: 1.05 !important;
+    }
+}
+
+/* УБРАНО: Ограничения для масштаба браузера 50%-35% */
+/* Эти ограничения вызывали обрезку тегов даже при 100% масштабе */
+/* Вместо этого, теги отображаются полностью, и проблема перекрытия решается через правильную структуру layout */
+
+/* Исправление отображения описания проекта в карточке */
+.project-card-compact .project-preview-mini {
+    padding-right: 0 !important; /* Убираем большой padding-right, который обрезал текст */
+    margin-bottom: 0.5rem !important; /* Уменьшенный отступ снизу для поднятия мета-информации */
+    min-height: 2.5em !important; /* Минимальная высота для отображения текста */
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important; /* Ограничение до 2 строк по умолчанию */
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+/* Ограничение описания проекта при масштабе 50%-35% для улучшения отображения нижней части карточки */
+/* При маленьком viewport (масштаб 50%-35%) ограничиваем описание до 1 строки */
+@media (max-width: 1400px) and (max-height: 900px) {
+    .project-card-compact .project-preview-mini {
+        -webkit-line-clamp: 1 !important; /* Только 1 строка при маленьком viewport */
+        max-height: 1.5em !important; /* Максимальная высота для 1 строки */
+        margin-bottom: 0.4rem !important; /* Уменьшенный отступ снизу для поднятия мета-информации */
+    }
+}
+
+/* Более строгие ограничения для очень маленького viewport (масштаб 35% и меньше) */
+@media (max-width: 1200px) and (max-height: 700px) {
+    .project-card-compact .project-preview-mini {
+        -webkit-line-clamp: 1 !important;
+        max-height: 1.4em !important;
+        margin-bottom: 0.3rem !important; /* Уменьшенный отступ снизу для поднятия мета-информации */
+        font-size: 0.8rem !important; /* Немного уменьшаем размер шрифта */
+    }
+}
+
+/* Переопределение стилей из минифицированного CSS для статуса "ongoing" */
+.project-card-compact.status-ongoing::before {
+    background: #E6D690 !important;
+}
+
+.tech-tag[data-status="ongoing"] {
+    border-color: #E6D690 !important;
+}
+
+.tech-tag[data-status="ongoing"]:hover {
+    border-color: #E6D690 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(230, 214, 144, 0.4) !important;
+}
+
+.tech-tag[data-status="ongoing"].active {
+    background: var(--secondary-color) !important;
+    color: #fff !important;
+    border-color: var(--secondary-color) !important;
+}
+
+/* Dark Theme Support для тегов технологий */
+@media (prefers-color-scheme: dark) {
+    .project-card-compact .tech-badge-mini {
+        background: #0f172a !important;
+        color: #e5e7eb !important;
+        border-color: #475569 !important;
+    }
+}
+
+/* Dark Theme Support */
+/* (удалены стили для .photo-caption, так как фото больше не используется в секции About) */
