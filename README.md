@@ -290,6 +290,7 @@
     ├── Changelog.md                        # Журнал изменений (формат Keep a Changelog)
     ├── Предложения для улучшения проекта YYYY-MM-DD.md # Форма для сбора предложений
     ├── Инструкция добавления проектов.md   # Инструкции по добавлению проектов
+    ├── commit_conventions.md               # Конвенция именования коммитов
     └── Аббревиатуры и сокращения.md        # Справочник аббревиатур и терминов
 
 **Примечание:** Все ресурсы (изображения, шрифты) размещены через CDN или внешние URL для оптимальной производительности.
@@ -703,6 +704,7 @@ This portfolio website is a **single-page application (SPA)** built with vanilla
     ├── Changelog.md                        # Changelog (Keep a Changelog format)
     ├── Предложения для улучшения проекта YYYY-MM-DD.md # Form for collecting suggestions
     ├── Инструкция добавления проектов.md   # Instructions for adding projects
+    ├── commit_conventions.md               #  Commit Naming Convention
     └── Аббревиатуры и сокращения.md        # Glossary of abbreviations and terms
 
 **Note:** All assets (images, fonts) are hosted via CDN or external URLs for optimal performance.
