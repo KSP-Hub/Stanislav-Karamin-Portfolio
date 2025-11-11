@@ -458,7 +458,8 @@
 
 **Создано с ❤️ с использованием vanilla веб-технологий**
 
-*Последнее обновление: 2025-11-09*
+
+*[Последнее обновление](#Последнее-обновление)*
 
 ---
 
@@ -872,4 +873,4 @@ Programmer-Analyst | Data Analyst
 
 **Built with ❤️ using vanilla web technologies**
 
-*Last updated: 2025-11-09*
+YYYY-MM-DD: *Last updated (Последнее обновление): 2025-11-09*
