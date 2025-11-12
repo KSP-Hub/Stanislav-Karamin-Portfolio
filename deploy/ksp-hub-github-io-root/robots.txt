@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ksp-hub.github.io/sitemap.xml
+
