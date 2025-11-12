@@ -11,7 +11,7 @@
 - **Пакет для корневого GitHub Pages репозитория `ksp-hub.github.io`**:
   - Создан минималистичный лендинг с мгновенным редиректом на портфолио и метатегами для SEO и верификации
   - Подготовлены `robots.txt` и `sitemap.xml` для корневого домена GitHub Pages
-  - Файлы собраны в каталог `deploy/ksp-hub-github-io-root/` и упакованы в архив `archives/ksp-hub-github-io-root.zip`
+  - Файлы собраны в каталог `deploy/ksp-hub-github-io-root/` и упакованы в `deploy/packages/ksp-hub-github-io-root.zip`
   - Добавлен скрипт `scripts/create_root_zip.py` для повторной сборки архива при необходимости
 
 ### Исправлено (2025-11-10)

@@ -2,9 +2,10 @@ import os
 import zipfile
 
 BASE_DIR = os.path.join("deploy", "ksp-hub-github-io-root")
-DEST_PATH = os.path.join("archives", "ksp-hub-github-io-root.zip")
+DEST_DIR = os.path.join("deploy", "packages")
+DEST_PATH = os.path.join(DEST_DIR, "ksp-hub-github-io-root.zip")
 
-os.makedirs("archives", exist_ok=True)
+os.makedirs(DEST_DIR, exist_ok=True)
 
 with zipfile.ZipFile(DEST_PATH, "w", zipfile.ZIP_DEFLATED) as archive:
     for root, _, files in os.walk(BASE_DIR):
