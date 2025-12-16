@@ -206,7 +206,7 @@
             technologies: ['Python', 'OpenCv', 'NumPy', 'SciPy', 'Tkinter'],
             category: 'ai',
             difficulty: 'advanced',
-            date: '2025-12-15',
+            date: '2025-11-09',
             image: 'https://raw.githubusercontent.com/KSP-Hub/My-CV-Engineering-Projects/main/Настроить%20Гибридного%20AI-агента%20для%20CV%20проектов/docs/Ai-Assist-image.webp',
             link: '',
             repo: 'https://github.com/KSP-Hub/My-CV-Engineering-Projects/tree/b17143114c9b2cee23461b25e6d119d4722b823a/%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B8%D1%82%D1%8C%20%D0%93%D0%B8%D0%B1%D1%80%D0%B8%D0%B4%D0%BD%D0%BE%D0%B3%D0%BE%20AI-%D0%B0%D0%B3%D0%B5%D0%BD%D1%82%D0%B0%20%D0%B4%D0%BB%D1%8F%20CV%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%BE%D0%B2/docs',
