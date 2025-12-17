@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ksp-hub-github-io-root">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/deploy/packages/ksp-hub-github-io-root.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
