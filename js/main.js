@@ -207,7 +207,7 @@
             category: 'ai',
             difficulty: 'advanced',
             date: '2025-11-09',
-            image: 'https://raw.githubusercontent.com/KSP-Hub/My-CV-Engineering-Projects/main/CV-000-ai-assistant/image/CV-000-Ai-Assistant-Image-1000.gif',
+            image: 'https://raw.githubusercontent.com/KSP-Hub/My-CV-Engineering-Projects/dbb576114f9ca0e6010b9e5f84dd49c21d36e764/CV-000-ai-assistant/images/CV-000-Ai-Assistant-Image-1000.gif',
             link: 'https://raw.githubusercontent.com/KSP-Hub/assets/https/github.dev/karamin-stanislav/karamin-stanislav/image/404orig.gif',
             repo: 'https://github.com/KSP-Hub/My-CV-Engineering-Projects/tree/main/CV-000-ai-assistant',
             hours: 98,
@@ -366,7 +366,7 @@
             link: '',
             repo: '',
             hours: 20,
-            status: 'backlog',
+            status: 'ongoing',
             features: ['Детекция QR-кодов под углом', 'Обработка перспективных искажений', 'Веб-интерфейс для загрузки', 'Декодирование различных форматов'],
             results: [
                 'Система распознавания с точностью >90% на реальных изображениях',
